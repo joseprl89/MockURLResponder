@@ -40,19 +40,27 @@ public class MockURLResponder: URLProtocol {
 
         mockResponse.consume()
 
-        defer {
-            client?.urlProtocolDidFinishLoading(self)
+        func respond() {
+            defer {
+                client?.urlProtocolDidFinishLoading(self)
+            }
+
+            guard !mockResponse.dropConnection else {
+                client?.urlProtocol(self, didFailWithError: NSError(domain: "MockURLRespoderKit", code: 1001, userInfo: nil))
+                return
+            }
+
+            let bodyData = mockResponse.body.data(using: .ascii)!
+            let response = HTTPURLResponse(url: request.url!, statusCode: mockResponse.status, httpVersion: nil, headerFields: mockResponse.headerFields)
+            client?.urlProtocol(self, didLoad: bodyData)
+            client?.urlProtocol(self, didReceive: response!, cacheStoragePolicy: .notAllowed)
         }
 
-        guard !mockResponse.dropConnection else {
-            client?.urlProtocol(self, didFailWithError: NSError(domain: "MockURLRespoderKit", code: 1001, userInfo: nil))
-            return
+        if mockResponse.delay > 0 {
+            DispatchQueue.global().asyncAfter(deadline: .now() + mockResponse.delay, execute: respond)
+        } else {
+            respond()
         }
-
-        let bodyData = mockResponse.body.data(using: .ascii)!
-        let response = HTTPURLResponse(url: request.url!, statusCode: mockResponse.status, httpVersion: nil, headerFields: mockResponse.headerFields)
-        client?.urlProtocol(self, didLoad: bodyData)
-        client?.urlProtocol(self, didReceive: response!, cacheStoragePolicy: .notAllowed)
     }
 
     public override func stopLoading() {

@@ -50,9 +50,10 @@ class MockURLResponse {
     let status: Int
     let headerFields: [String: String]
     let body: String
+    let delay: TimeInterval
     private(set) var repetitionsLeft: Int
 
-    init(path: String, method: String, dropConnection: Bool, status: Int, headerFields: [String: String], body: String, repetitionsLeft: Int) {
+    init(path: String, method: String, dropConnection: Bool, status: Int, headerFields: [String: String], body: String, repetitionsLeft: Int, delay: TimeInterval) {
         self.path = path
         self.dropConnection = dropConnection
         self.method = method
@@ -60,6 +61,7 @@ class MockURLResponse {
         self.headerFields = headerFields
         self.body = body
         self.repetitionsLeft = repetitionsLeft
+        self.delay = delay
     }
 
     var jsonArguments: [String: Any] {
@@ -70,7 +72,8 @@ class MockURLResponse {
             "status": status,
             "headerFields": headerFields,
             "body": body,
-            "repetitions": repetitionsLeft
+            "repetitions": repetitionsLeft,
+            "delay": delay
         ]
     }
 
@@ -80,6 +83,7 @@ class MockURLResponse {
             let status = argument["status"] as? Int,
             let headerFields = argument["headerFields"] as? [String: String],
             let repetitionsLeft = argument["repetitions"] as? Int,
+            let delay = argument["delay"] as? TimeInterval,
             let body = argument["body"] as? String else {
                 fatalError("Unexpected nil values in MockURLResponse. Argument: \(argument)")
         }
@@ -93,7 +97,8 @@ class MockURLResponse {
             status: status,
             headerFields: headerFields,
             body: body,
-            repetitionsLeft: repetitionsLeft
+            repetitionsLeft: repetitionsLeft,
+            delay: delay
         )
     }
 
@@ -110,6 +115,7 @@ public class MockURLResponseBuilder {
     private var status = 200
     private var body: String = ""
     private var headerFields: [String: String] = [:]
+    private var delay: TimeInterval = 0
     private var dropConnection = false
 
     init(configurator: MockURLResponderConfigurator, path: String, method: String) {
@@ -138,6 +144,11 @@ public class MockURLResponseBuilder {
         return self
     }
 
+    public func with(delay: TimeInterval) -> MockURLResponseBuilder {
+        self.delay = delay
+        return self
+    }
+
     public func once() {
         self.configurator.responses += [buildResponse(repetitions: 1)]
     }
@@ -151,7 +162,7 @@ public class MockURLResponseBuilder {
     }
 
     private func buildResponse(repetitions: Int) -> MockURLResponse {
-        return MockURLResponse(path: path, method: method, dropConnection: dropConnection, status:status, headerFields: headerFields, body: body, repetitionsLeft: repetitions)
+        return MockURLResponse(path: path, method: method, dropConnection: dropConnection, status:status, headerFields: headerFields, body: body, repetitionsLeft: repetitions, delay: delay)
     }
 }
 

@@ -152,7 +152,7 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         }
     }
 
-    func test_canDropConnections() {
+    func test_dropsConnections() {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         configurator.respond(to: "/path", method: "GET")
@@ -162,5 +162,22 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         MockURLResponder.setUp(with: configurator.arguments)
 
         XCTAssertNotNil(getError("https://www.w3.org/path"))
+    }
+
+    func test_addsDelay() {
+        let delay: TimeInterval = 0.2
+        let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
+
+        configurator.respond(to: "/path", method: "GET")
+            .with(delay: delay)
+            .once()
+
+        MockURLResponder.setUp(with: configurator.arguments)
+
+        let startTime = Date()
+        XCTAssertNotNil(get("https://www.w3.org/path"))
+        let endTime = Date()
+
+        XCTAssertGreaterThan(endTime.timeIntervalSince(startTime), delay)
     }
 }
