@@ -192,4 +192,16 @@ class MockURLResponderAcceptanceTests: XCTestCase {
 
         XCTAssertEqual(get("https://www.w3.org/path"), "response")
     }
+
+    func test_supportsFileAsBodyResponse() {
+        let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
+
+        configurator.respond(to: "/path", method: "GET")
+            .with(resource: "test", ofType: "json", bundle: Bundle(for: MockURLResponderAcceptanceTests.self))
+            .once()
+
+        MockURLResponder.setUp(with: configurator.arguments + ["-FIRDebugEnabled"])
+
+        XCTAssertEqual(get("https://www.w3.org/path"), "{ \"test\": \"passed\" }\n")
+    }
 }

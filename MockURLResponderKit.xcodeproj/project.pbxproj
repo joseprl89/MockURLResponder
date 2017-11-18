@@ -13,6 +13,7 @@
 		92285B171FC079D0001D5E1B /* NetworkInteractions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92285B161FC079D0001D5E1B /* NetworkInteractions.swift */; };
 		92285B191FC07B97001D5E1B /* MockURLResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92285B181FC07B97001D5E1B /* MockURLResponder.swift */; };
 		92285B1A1FC08053001D5E1B /* MockURLResponderConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92285B111FC07753001D5E1B /* MockURLResponderConfigurator.swift */; };
+		92285B1D1FC0B1B7001D5E1B /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 92285B1C1FC0B1B7001D5E1B /* test.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		92285B111FC07753001D5E1B /* MockURLResponderConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLResponderConfigurator.swift; sourceTree = "<group>"; };
 		92285B161FC079D0001D5E1B /* NetworkInteractions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInteractions.swift; sourceTree = "<group>"; };
 		92285B181FC07B97001D5E1B /* MockURLResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLResponder.swift; sourceTree = "<group>"; };
+		92285B1C1FC0B1B7001D5E1B /* test.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 			children = (
 				92285B0D1FC0759D001D5E1B /* MockURLResponderAcceptanceTests.swift */,
 				92285B151FC079C1001D5E1B /* TestHelpers */,
+				92285B1B1FC0B19C001D5E1B /* TestFiles */,
 				92285AF71FC0750E001D5E1B /* Info.plist */,
 			);
 			path = MockURLResponderKitTests;
@@ -109,6 +112,14 @@
 				92285B161FC079D0001D5E1B /* NetworkInteractions.swift */,
 			);
 			path = TestHelpers;
+			sourceTree = "<group>";
+		};
+		92285B1B1FC0B19C001D5E1B /* TestFiles */ = {
+			isa = PBXGroup;
+			children = (
+				92285B1C1FC0B1B7001D5E1B /* test.json */,
+			);
+			path = TestFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +223,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92285B1D1FC0B1B7001D5E1B /* test.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

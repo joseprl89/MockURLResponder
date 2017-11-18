@@ -140,6 +140,22 @@ public class MockURLResponseBuilder {
         return self
     }
 
+    public func with(resource: String, ofType type: String, directory: String? = nil, localization: String? = nil, bundle: Bundle = .main) -> MockURLResponseBuilder {
+        let url = bundle.url(
+            forResource: resource,
+            withExtension: type,
+            subdirectory: directory,
+            localization: localization
+        )!
+
+        return with(bodyFromURL: url)
+    }
+
+    public func with(bodyFromURL url: URL) -> MockURLResponseBuilder {
+        self.body = try! String(contentsOf: url, encoding: .utf8)
+        return self
+    }
+
     public func with(status: Int) -> MockURLResponseBuilder {
         self.status = status
         return self
