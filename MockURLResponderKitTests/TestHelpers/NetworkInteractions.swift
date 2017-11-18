@@ -34,7 +34,7 @@ func getStatus(_ url: String) -> Int {
         XCTAssertNotNil(data)
 
         guard let httpResponse = response as? HTTPURLResponse else {
-            fatalError("Response \(response) was not an HTTPURLResponse")
+            fatalError("Response \(String(describing: response)) was not an HTTPURLResponse")
         }
         resultStatus = httpResponse.statusCode
         semaphore.signal()
@@ -87,7 +87,7 @@ func getHeaders(_ url: String) -> [String: String] {
         XCTAssertNotNil(data)
 
         guard let httpResponse = response as? HTTPURLResponse else {
-            fatalError("Response \(response) was not an HTTPURLResponse")
+            fatalError("Response \(String(describing: response)) was not an HTTPURLResponse")
         }
         result = httpResponse.allHeaderFields as? [String: String]
         semaphore.signal()
