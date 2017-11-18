@@ -12,6 +12,20 @@ private var responseHosts: [MockURLHostResponse]!
 
 public class MockURLResponder: URLProtocol {
 
+    public enum MockingBehaviour {
+        case allowNonMockedNetworkCalls
+        case dropNonMockedNetworkCalls
+        case preventNonMockedNetworkCalls
+    }
+
+    /**
+     * Set to true if you want to allow your tests to hit the network
+     *    while the Mock URL responder is activated.
+     * When set to false, the URLProtocol implementation will crash your
+     * app if a network request sent to an unexpected host is fired.
+     */
+    public static var mockingBehaviour: MockingBehaviour = .preventNonMockedNetworkCalls
+
     public static func setUp(with arguments: [String] = ProcessInfo.processInfo.arguments) {
         let tempResponseHosts = arguments.flatMap { MockURLHostResponse.from(argument: $0) }
 
@@ -26,7 +40,12 @@ public class MockURLResponder: URLProtocol {
     }
 
     override public class func canInit(with request: URLRequest) -> Bool {
-        return matchingResponse(forRequest: request) != nil
+        switch mockingBehaviour {
+        case .allowNonMockedNetworkCalls:
+            return matchingResponse(forRequest: request) != nil
+        case .dropNonMockedNetworkCalls, .preventNonMockedNetworkCalls:
+            return true
+        }
     }
 
     override open class func canonicalRequest(for request: URLRequest) -> URLRequest {
@@ -35,7 +54,14 @@ public class MockURLResponder: URLProtocol {
 
     public override func startLoading() {
         guard let mockResponse = matchingResponse(forRequest: request) else {
-            fatalError("Couldn't locate a valid response to \(request)")
+            switch MockURLResponder.mockingBehaviour {
+            case .preventNonMockedNetworkCalls:
+                fatalError("Couldn't locate a valid response to \(request)")
+            default:
+                client?.urlProtocol(self, didFailWithError: NSError(domain: "MockURLRespoderKit", code: 1001, userInfo: nil))
+                client?.urlProtocolDidFinishLoading(self)
+            }
+            return
         }
 
         mockResponse.consume()
