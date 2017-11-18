@@ -41,6 +41,7 @@ struct MockURLResponse {
     let path: String
     let method: String
     let status: Int
+    let headerFields: [String: String]
     let body: String
 
     var jsonArguments: [String: Any] {
@@ -48,6 +49,7 @@ struct MockURLResponse {
             "path": path,
             "method": method,
             "status": status,
+            "headerFields": headerFields,
             "body": body
         ]
     }
@@ -56,11 +58,18 @@ struct MockURLResponse {
         guard let path = argument["path"] as? String,
             let method = argument["method"] as? String,
             let status = argument["status"] as? Int,
+            let headerFields = argument["headerFields"] as? [String: String],
             let body = argument["body"] as? String else {
                 fatalError("Unexpected nil values in MockURLResponse. Argument: \(argument)")
         }
 
-        return MockURLResponse(path: path, method: method, status: status, body: body)
+        return MockURLResponse(
+            path: path,
+            method: method,
+            status: status,
+            headerFields: headerFields,
+            body: body
+        )
     }
 }
 
@@ -71,6 +80,7 @@ public class MockURLResponseBuilder {
     private let method: String
     private var status = 200
     private var body: String = ""
+    private var headerFields: [String: String] = [:]
 
     init(configurator: MockURLResponderConfigurator, path: String, method: String) {
         self.configurator = configurator
@@ -88,12 +98,17 @@ public class MockURLResponseBuilder {
         return self
     }
 
+    public func set(value: String, forHeaderField key: String) -> MockURLResponseBuilder {
+        headerFields[key] = value
+        return self
+    }
+
     public func once() {
         self.configurator.responses += [buildResponse()]
     }
 
     private func buildResponse() -> MockURLResponse {
-        return MockURLResponse(path: path, method: method, status:status, body: body)
+        return MockURLResponse(path: path, method: method, status:status, headerFields: headerFields, body: body)
     }
 }
 

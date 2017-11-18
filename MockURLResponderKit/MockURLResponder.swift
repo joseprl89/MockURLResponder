@@ -43,7 +43,7 @@ public class MockURLResponder: URLProtocol {
         }
 
         let bodyData = mockResponse.body.data(using: .ascii)!
-        let response = HTTPURLResponse(url: request.url!, statusCode: mockResponse.status, httpVersion: nil, headerFields: nil)
+        let response = HTTPURLResponse(url: request.url!, statusCode: mockResponse.status, httpVersion: nil, headerFields: mockResponse.headerFields)
         client?.urlProtocol(self, didLoad: bodyData)
         client?.urlProtocol(self, didReceive: response!, cacheStoragePolicy: .notAllowed)
     }

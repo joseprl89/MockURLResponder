@@ -16,8 +16,61 @@ func get(_ url: String) -> String {
 func post(_ url: String) -> String {
     return submitRequest(method: .POST, url: url)
 }
+
 func getStatus(_ url: String) -> Int {
-    return submitRequestForStatus(method: .GET, url: url)
+    guard let urlBuilt = URL(string: url) else {
+        fatalError("Couldn't create a url request from \(url)")
+    }
+
+    var urlRequest = URLRequest(url: urlBuilt)
+    urlRequest.httpMethod = HTTPMethod.GET.rawValue
+
+    let semaphore = DispatchSemaphore(value: 0)
+
+    var resultStatus: Int!
+
+    URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+        XCTAssertNil(error)
+        XCTAssertNotNil(data)
+
+        guard let httpResponse = response as? HTTPURLResponse else {
+            fatalError("Response \(response) was not an HTTPURLResponse")
+        }
+        resultStatus = httpResponse.statusCode
+        semaphore.signal()
+    }.resume()
+
+    semaphore.wait()
+
+    return resultStatus
+}
+
+func getHeaders(_ url: String) -> [String: String] {
+    guard let urlBuilt = URL(string: url) else {
+        fatalError("Couldn't create a url request from \(url)")
+    }
+
+    var urlRequest = URLRequest(url: urlBuilt)
+    urlRequest.httpMethod = HTTPMethod.GET.rawValue
+
+    let semaphore = DispatchSemaphore(value: 0)
+
+    var result: [String: String]!
+
+    URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+        XCTAssertNil(error)
+        XCTAssertNotNil(data)
+
+        guard let httpResponse = response as? HTTPURLResponse else {
+            fatalError("Response \(response) was not an HTTPURLResponse")
+        }
+        result = httpResponse.allHeaderFields as? [String: String]
+        semaphore.signal()
+    }.resume()
+
+    semaphore.wait()
+
+    return result
 }
 
 func submitRequest(method: HTTPMethod, url: String) -> String {
@@ -42,31 +95,4 @@ func submitRequest(method: HTTPMethod, url: String) -> String {
     semaphore.wait()
 
     return result
-}
-func submitRequestForStatus(method: HTTPMethod, url: String) -> Int {
-    guard let urlBuilt = URL(string: url) else {
-        fatalError("Couldn't create a url request from \(url)")
-    }
-
-    var urlRequest = URLRequest(url: urlBuilt)
-    urlRequest.httpMethod = method.rawValue
-
-    let semaphore = DispatchSemaphore(value: 0)
-
-    var resultStatus: Int!
-
-    URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-        XCTAssertNil(error)
-        XCTAssertNotNil(data)
-
-        guard let httpResponse = response as? HTTPURLResponse else {
-            fatalError("Response \(response) was not an HTTPURLResponse")
-        }
-        resultStatus = httpResponse.statusCode
-        semaphore.signal()
-        }.resume()
-
-    semaphore.wait()
-
-    return resultStatus
 }

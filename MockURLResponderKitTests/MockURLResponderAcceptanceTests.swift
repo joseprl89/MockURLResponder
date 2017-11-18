@@ -69,5 +69,17 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         MockURLResponder.setUp(with: configurator.arguments)
         XCTAssertEqual(getStatus("https://www.w3.org/path?q=query#fragment"), 200)
     }
+
+    func test_mocksServerCanMockHeaders() {
+        let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
+
+        configurator.respond(to: "/path", method: "GET")
+            .set(body: body)
+            .set(value: "test passes", forHeaderField: "testHeader")
+            .once()
+
+        MockURLResponder.setUp(with: configurator.arguments)
+        XCTAssertEqual(getHeaders("https://www.w3.org/path?q=query#fragment")["testHeader"], "test passes")
+    }
     
 }
