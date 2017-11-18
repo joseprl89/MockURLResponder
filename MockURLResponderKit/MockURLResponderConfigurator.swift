@@ -46,13 +46,15 @@ class MockURLResponse {
 
     let path: String
     let method: String
+    let dropConnection: Bool
     let status: Int
     let headerFields: [String: String]
     let body: String
     private(set) var repetitionsLeft: Int
 
-    init(path: String, method: String, status: Int, headerFields: [String: String], body: String, repetitionsLeft: Int) {
+    init(path: String, method: String, dropConnection: Bool, status: Int, headerFields: [String: String], body: String, repetitionsLeft: Int) {
         self.path = path
+        self.dropConnection = dropConnection
         self.method = method
         self.status = status
         self.headerFields = headerFields
@@ -64,6 +66,7 @@ class MockURLResponse {
         return [
             "path": path,
             "method": method,
+            "dropConnection": dropConnection ? "true" : "false",
             "status": status,
             "headerFields": headerFields,
             "body": body,
@@ -81,9 +84,12 @@ class MockURLResponse {
                 fatalError("Unexpected nil values in MockURLResponse. Argument: \(argument)")
         }
 
+        let dropConnection = argument["dropConnection"] as? String == "true"
+
         return MockURLResponse(
             path: path,
             method: method,
+            dropConnection: dropConnection,
             status: status,
             headerFields: headerFields,
             body: body,
@@ -104,6 +110,7 @@ public class MockURLResponseBuilder {
     private var status = 200
     private var body: String = ""
     private var headerFields: [String: String] = [:]
+    private var dropConnection = false
 
     init(configurator: MockURLResponderConfigurator, path: String, method: String) {
         self.configurator = configurator
@@ -126,6 +133,11 @@ public class MockURLResponseBuilder {
         return self
     }
 
+    public func withDroppedRequest() -> MockURLResponseBuilder {
+        dropConnection = true
+        return self
+    }
+
     public func once() {
         self.configurator.responses += [buildResponse(repetitions: 1)]
     }
@@ -134,8 +146,12 @@ public class MockURLResponseBuilder {
         self.configurator.responses += [buildResponse(repetitions: repetitions)]
     }
 
+    public func always() {
+        self.configurator.responses += [buildResponse(repetitions: Int.max)]
+    }
+
     private func buildResponse(repetitions: Int) -> MockURLResponse {
-        return MockURLResponse(path: path, method: method, status:status, headerFields: headerFields, body: body, repetitionsLeft: repetitions)
+        return MockURLResponse(path: path, method: method, dropConnection: dropConnection, status:status, headerFields: headerFields, body: body, repetitionsLeft: repetitions)
     }
 }
 

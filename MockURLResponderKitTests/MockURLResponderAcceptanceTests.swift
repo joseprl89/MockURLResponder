@@ -137,4 +137,30 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         XCTAssertEqual(get("https://www.w3.org/path"), "one")
         XCTAssertEqual(get("https://www.w3.org/path"), "three")
     }
+
+    func test_mocksServerCanRepeatResponsesForever() {
+        let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
+
+        configurator.respond(to: "/path", method: "GET")
+            .with(body: "one")
+            .always()
+
+        MockURLResponder.setUp(with: configurator.arguments)
+
+        for _ in 0..<100 {
+            XCTAssertEqual(get("https://www.w3.org/path"), "one")
+        }
+    }
+
+    func test_canDropConnections() {
+        let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
+
+        configurator.respond(to: "/path", method: "GET")
+            .withDroppedRequest()
+            .once()
+
+        MockURLResponder.setUp(with: configurator.arguments)
+
+        XCTAssertNotNil(getError("https://www.w3.org/path"))
+    }
 }

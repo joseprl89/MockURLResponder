@@ -44,6 +44,11 @@ public class MockURLResponder: URLProtocol {
             client?.urlProtocolDidFinishLoading(self)
         }
 
+        guard !mockResponse.dropConnection else {
+            client?.urlProtocol(self, didFailWithError: NSError(domain: "MockURLRespoderKit", code: 1001, userInfo: nil))
+            return
+        }
+
         let bodyData = mockResponse.body.data(using: .ascii)!
         let response = HTTPURLResponse(url: request.url!, statusCode: mockResponse.status, httpVersion: nil, headerFields: mockResponse.headerFields)
         client?.urlProtocol(self, didLoad: bodyData)

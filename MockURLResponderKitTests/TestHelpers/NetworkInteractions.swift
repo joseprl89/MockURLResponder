@@ -38,11 +38,36 @@ func getStatus(_ url: String) -> Int {
         }
         resultStatus = httpResponse.statusCode
         semaphore.signal()
-    }.resume()
+        }.resume()
 
     semaphore.wait()
 
     return resultStatus
+}
+
+func getError(_ url: String) -> Error {
+    guard let urlBuilt = URL(string: url) else {
+        fatalError("Couldn't create a url request from \(url)")
+    }
+
+    var urlRequest = URLRequest(url: urlBuilt)
+    urlRequest.httpMethod = HTTPMethod.GET.rawValue
+
+    let semaphore = DispatchSemaphore(value: 0)
+
+    var result: Error!
+
+    URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+        XCTAssertNotNil(error)
+        XCTAssertNil(data)
+
+        result = error
+        semaphore.signal()
+    }.resume()
+
+    semaphore.wait()
+
+    return result
 }
 
 func getHeaders(_ url: String) -> [String: String] {
