@@ -18,12 +18,6 @@ public class MockURLResponder: URLProtocol {
         case preventNonMockedNetworkCalls
     }
 
-    /**
-     * Set to true if you want to allow your tests to hit the network
-     *    while the Mock URL responder is activated.
-     * When set to false, the URLProtocol implementation will crash your
-     * app if a network request sent to an unexpected host is fired.
-     */
     public static var mockingBehaviour: MockingBehaviour = .preventNonMockedNetworkCalls
 
     public static func setUp(with arguments: [String] = ProcessInfo.processInfo.arguments) {
