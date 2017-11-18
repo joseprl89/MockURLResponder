@@ -21,7 +21,7 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         configurator.respond(to: "/path", method: "GET")
-            .with(body)
+            .set(body: body)
             .once()
 
         MockURLResponder.setUp(with: configurator.arguments)
@@ -33,11 +33,11 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         configurator.respond(to: "/path", method: "GET")
-            .with(body)
+            .set(body: body)
             .once()
 
         configurator.respond(to: "/path", method: "POST")
-            .with("Received from POST")
+            .set(body: "Received from POST")
             .once()
 
         MockURLResponder.setUp(with: configurator.arguments)
@@ -45,6 +45,29 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         let bodyReceived =  post("https://www.w3.org/path?q=query#fragment")
         XCTAssertEqual(bodyReceived, "Received from POST")
         XCTAssertNotEqual(bodyReceived, body)
+    }
+
+    func test_mocksServerCanMockStatusCode() {
+        let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
+        
+        configurator.respond(to: "/path", method: "GET")
+            .set(body: body)
+            .set(status: 400)
+            .once()
+        
+        MockURLResponder.setUp(with: configurator.arguments)
+        XCTAssertEqual(getStatus("https://www.w3.org/path?q=query#fragment"), 400)
+    }
+
+    func test_mocksServerDefaultsTo200() {
+        let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
+
+        configurator.respond(to: "/path", method: "GET")
+            .set(body: body)
+            .once()
+
+        MockURLResponder.setUp(with: configurator.arguments)
+        XCTAssertEqual(getStatus("https://www.w3.org/path?q=query#fragment"), 200)
     }
     
 }

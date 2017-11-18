@@ -43,8 +43,9 @@ public class MockURLResponder: URLProtocol {
         }
 
         let bodyData = mockResponse.body.data(using: .ascii)!
+        let response = HTTPURLResponse(url: request.url!, statusCode: mockResponse.status, httpVersion: nil, headerFields: nil)
         client?.urlProtocol(self, didLoad: bodyData)
-//        client?.urlProtocol(self, didReceive: HTTPURLResponse(), cacheStoragePolicy: .allowedInMemoryOnly)
+        client?.urlProtocol(self, didReceive: response!, cacheStoragePolicy: .notAllowed)
     }
 
     public override func stopLoading() {

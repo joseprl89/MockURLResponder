@@ -40,12 +40,14 @@ struct MockURLResponse {
 
     let path: String
     let method: String
+    let status: Int
     let body: String
 
     var jsonArguments: [String: Any] {
         return [
             "path": path,
             "method": method,
+            "status": status,
             "body": body
         ]
     }
@@ -53,11 +55,12 @@ struct MockURLResponse {
     static func from(argument: [String: Any]) -> MockURLResponse {
         guard let path = argument["path"] as? String,
             let method = argument["method"] as? String,
+            let status = argument["status"] as? Int,
             let body = argument["body"] as? String else {
                 fatalError("Unexpected nil values in MockURLResponse. Argument: \(argument)")
         }
 
-        return MockURLResponse(path: path, method: method, body: body)
+        return MockURLResponse(path: path, method: method, status: status, body: body)
     }
 }
 
@@ -66,6 +69,7 @@ public class MockURLResponseBuilder {
     private let configurator: MockURLResponderConfigurator
     private let path: String
     private let method: String
+    private var status = 200
     private var body: String = ""
 
     init(configurator: MockURLResponderConfigurator, path: String, method: String) {
@@ -74,9 +78,13 @@ public class MockURLResponseBuilder {
         self.method = method
     }
 
-
-    public func with(_ body: String) -> MockURLResponseBuilder {
+    public func set(body: String) -> MockURLResponseBuilder {
         self.body = body
+        return self
+    }
+
+    public func set(status: Int) -> MockURLResponseBuilder {
+        self.status = status
         return self
     }
 
@@ -85,7 +93,7 @@ public class MockURLResponseBuilder {
     }
 
     private func buildResponse() -> MockURLResponse {
-        return MockURLResponse(path: path, method: method, body: body)
+        return MockURLResponse(path: path, method: method, status:status, body: body)
     }
 }
 
@@ -112,7 +120,6 @@ public class MockURLResponderConfigurator {
         self.host = host
     }
 
-    /// TODO Better API
     public func respond(to path: String, method: String = HTTPMethod.GET.rawValue) -> MockURLResponseBuilder {
         return MockURLResponseBuilder(configurator: self, path: path, method: method)
     }
