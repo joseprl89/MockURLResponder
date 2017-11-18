@@ -180,4 +180,16 @@ class MockURLResponderAcceptanceTests: XCTestCase {
 
         XCTAssertGreaterThan(endTime.timeIntervalSince(startTime), delay)
     }
+
+    func test_isCompatibleWithExtraArguments() {
+        let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
+
+        configurator.respond(to: "/path", method: "GET")
+            .with(body: "response")
+            .once()
+
+        MockURLResponder.setUp(with: configurator.arguments + ["-FIRDebugEnabled"])
+
+        XCTAssertEqual(get("https://www.w3.org/path"), "response")
+    }
 }

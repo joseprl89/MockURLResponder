@@ -26,7 +26,18 @@ class MockURLHostResponse {
         self.responses = responses
     }
 
-    static func from(argument: [String: Any]) -> MockURLHostResponse {
+    static func from(argument: String) -> MockURLHostResponse? {
+        guard argument.starts(with: "--mock-url-response=") else {
+            return nil
+        }
+
+        let argumentData = argument.replacingOccurrences(of: "--mock-url-response=", with: "").data(using: .ascii)!
+        let jsonArgument = try! JSONSerialization.jsonObject(with: argumentData) as! [String: Any]
+
+        return from(jsonArgument: jsonArgument)
+    }
+
+    static func from(jsonArgument argument: [String: Any]) -> MockURLHostResponse {
         guard let scheme = argument["scheme"] as? String,
             let host = argument["host"] as? String,
             let responses = argument["responses"] as? [[String: Any]] else {
@@ -173,7 +184,10 @@ public class MockURLResponderConfigurator {
     fileprivate var responses: [MockURLResponse] = []
 
     public var arguments: [String] {
-        return [String(data: try! JSONSerialization.data(withJSONObject: jsonArguments), encoding: .ascii)!]
+        let stringJSONArgument = String(data: try! JSONSerialization.data(withJSONObject: jsonArguments), encoding: .ascii)!
+        return [
+            "--mock-url-response=\(stringJSONArgument)"
+        ]
     }
 
     private var jsonArguments: [String: Any] {

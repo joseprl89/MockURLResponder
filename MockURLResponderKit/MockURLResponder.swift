@@ -13,7 +13,7 @@ private var responseHosts: [MockURLHostResponse]!
 public class MockURLResponder: URLProtocol {
 
     public static func setUp(with arguments: [String] = ProcessInfo.processInfo.arguments) {
-        let tempResponseHosts = arguments.map { MockURLHostResponse.from(argument: try! JSONSerialization.jsonObject(with: $0.data(using: .ascii)!) as! [String: Any]) }
+        let tempResponseHosts = arguments.flatMap { MockURLHostResponse.from(argument: $0) }
 
         responseHosts = tempResponseHosts
 
