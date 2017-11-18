@@ -70,16 +70,71 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         XCTAssertEqual(getStatus("https://www.w3.org/path?q=query#fragment"), 200)
     }
 
-    func test_mocksServerCanMockHeaders() {
+    func test_mocksServerCanMockMultipleHostsAtOnce() {
+        let w3OrgConfigurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
+
+        w3OrgConfigurator.respond(to: "/path", method: "GET")
+            .set(body: "w3")
+            .once()
+
+        let googleConfigurator = MockURLResponderConfigurator(scheme: "https", host: "www.google.com")
+
+        googleConfigurator.respond(to: "/path", method: "GET")
+            .set(body: "google")
+            .once()
+
+        MockURLResponder.setUp(with: w3OrgConfigurator.arguments + googleConfigurator.arguments)
+        XCTAssertEqual(get("https://www.google.com/path"), "google")
+        XCTAssertEqual(get("https://www.w3.org/path"), "w3")
+    }
+
+    func test_mocksServerCanMockMultiplePathsAtOnce() {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
-        configurator.respond(to: "/path", method: "GET")
-            .set(body: body)
-            .set(value: "test passes", forHeaderField: "testHeader")
+        configurator.respond(to: "/path/one", method: "GET")
+            .set(body: "one")
+            .once()
+
+        configurator.respond(to: "/path/two", method: "GET")
+            .set(body: "two")
             .once()
 
         MockURLResponder.setUp(with: configurator.arguments)
-        XCTAssertEqual(getHeaders("https://www.w3.org/path?q=query#fragment")["testHeader"], "test passes")
+        XCTAssertEqual(get("https://www.w3.org/path/one"), "one")
+        XCTAssertEqual(get("https://www.w3.org/path/two"), "two")
     }
-    
+
+    func test_mocksServerCanMockMultipleResponsesSerially() {
+        let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
+
+        configurator.respond(to: "/path", method: "GET")
+            .set(body: "one")
+            .once()
+
+        configurator.respond(to: "/path", method: "GET")
+            .set(body: "two")
+            .once()
+
+        MockURLResponder.setUp(with: configurator.arguments)
+        XCTAssertEqual(get("https://www.w3.org/path"), "one")
+        XCTAssertEqual(get("https://www.w3.org/path"), "two")
+    }
+
+    func test_mocksServerCanRepeatResponses() {
+        let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
+
+        configurator.respond(to: "/path", method: "GET")
+            .set(body: "one")
+            .times(2)
+
+        configurator.respond(to: "/path", method: "GET")
+            .set(body: "three")
+            .once()
+
+        MockURLResponder.setUp(with: configurator.arguments)
+
+        XCTAssertEqual(get("https://www.w3.org/path"), "one")
+        XCTAssertEqual(get("https://www.w3.org/path"), "one")
+        XCTAssertEqual(get("https://www.w3.org/path"), "three")
+    }
 }

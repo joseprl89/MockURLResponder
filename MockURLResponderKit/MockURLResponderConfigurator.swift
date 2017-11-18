@@ -15,10 +15,16 @@ public enum HTTPMethod: String {
     case HEAD
 }
 
-struct MockURLHostResponse {
+class MockURLHostResponse {
     let scheme: String
     let host: String
     let responses: [MockURLResponse]
+
+    init(scheme: String, host: String, responses: [MockURLResponse]) {
+        self.scheme = scheme
+        self.host = host
+        self.responses = responses
+    }
 
     static func from(argument: [String: Any]) -> MockURLHostResponse {
         guard let scheme = argument["scheme"] as? String,
@@ -36,13 +42,23 @@ struct MockURLHostResponse {
 
 }
 
-struct MockURLResponse {
+class MockURLResponse {
 
     let path: String
     let method: String
     let status: Int
     let headerFields: [String: String]
     let body: String
+    private(set) var repetitionsLeft: Int
+
+    init(path: String, method: String, status: Int, headerFields: [String: String], body: String, repetitionsLeft: Int) {
+        self.path = path
+        self.method = method
+        self.status = status
+        self.headerFields = headerFields
+        self.body = body
+        self.repetitionsLeft = repetitionsLeft
+    }
 
     var jsonArguments: [String: Any] {
         return [
@@ -50,7 +66,8 @@ struct MockURLResponse {
             "method": method,
             "status": status,
             "headerFields": headerFields,
-            "body": body
+            "body": body,
+            "repetitions": repetitionsLeft
         ]
     }
 
@@ -59,6 +76,7 @@ struct MockURLResponse {
             let method = argument["method"] as? String,
             let status = argument["status"] as? Int,
             let headerFields = argument["headerFields"] as? [String: String],
+            let repetitionsLeft = argument["repetitions"] as? Int,
             let body = argument["body"] as? String else {
                 fatalError("Unexpected nil values in MockURLResponse. Argument: \(argument)")
         }
@@ -68,8 +86,13 @@ struct MockURLResponse {
             method: method,
             status: status,
             headerFields: headerFields,
-            body: body
+            body: body,
+            repetitionsLeft: repetitionsLeft
         )
+    }
+
+    func consume() {
+        repetitionsLeft -= 1
     }
 }
 
@@ -104,11 +127,15 @@ public class MockURLResponseBuilder {
     }
 
     public func once() {
-        self.configurator.responses += [buildResponse()]
+        self.configurator.responses += [buildResponse(repetitions: 1)]
     }
 
-    private func buildResponse() -> MockURLResponse {
-        return MockURLResponse(path: path, method: method, status:status, headerFields: headerFields, body: body)
+    public func times(_ repetitions: Int) {
+        self.configurator.responses += [buildResponse(repetitions: repetitions)]
+    }
+
+    private func buildResponse(repetitions: Int) -> MockURLResponse {
+        return MockURLResponse(path: path, method: method, status:status, headerFields: headerFields, body: body, repetitionsLeft: repetitions)
     }
 }
 

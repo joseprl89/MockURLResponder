@@ -38,6 +38,8 @@ public class MockURLResponder: URLProtocol {
             fatalError("Couldn't locate a valid response to \(request)")
         }
 
+        mockResponse.consume()
+
         defer {
             client?.urlProtocolDidFinishLoading(self)
         }
@@ -59,6 +61,6 @@ private func matchingResponse(forRequest request: URLRequest) -> MockURLResponse
     })
 
     return host?.responses.first(where: {
-        return $0.method == request.httpMethod && $0.path == request.url?.path
+        return $0.method == request.httpMethod && $0.path == request.url?.path && $0.repetitionsLeft > 0
     })
 }
