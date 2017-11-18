@@ -111,17 +111,17 @@ public class MockURLResponseBuilder {
         self.method = method
     }
 
-    public func set(body: String) -> MockURLResponseBuilder {
+    public func with(body: String) -> MockURLResponseBuilder {
         self.body = body
         return self
     }
 
-    public func set(status: Int) -> MockURLResponseBuilder {
+    public func with(status: Int) -> MockURLResponseBuilder {
         self.status = status
         return self
     }
 
-    public func set(value: String, forHeaderField key: String) -> MockURLResponseBuilder {
+    public func with(value: String, forHeaderField key: String) -> MockURLResponseBuilder {
         headerFields[key] = value
         return self
     }

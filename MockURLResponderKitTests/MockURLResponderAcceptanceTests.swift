@@ -21,7 +21,7 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         configurator.respond(to: "/path", method: "GET")
-            .set(body: body)
+            .with(body: body)
             .once()
 
         MockURLResponder.setUp(with: configurator.arguments)
@@ -33,11 +33,11 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         configurator.respond(to: "/path", method: "GET")
-            .set(body: body)
+            .with(body: body)
             .once()
 
         configurator.respond(to: "/path", method: "POST")
-            .set(body: "Received from POST")
+            .with(body: "Received from POST")
             .once()
 
         MockURLResponder.setUp(with: configurator.arguments)
@@ -51,8 +51,8 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
         
         configurator.respond(to: "/path", method: "GET")
-            .set(body: body)
-            .set(status: 400)
+            .with(body: body)
+            .with(status: 400)
             .once()
         
         MockURLResponder.setUp(with: configurator.arguments)
@@ -63,7 +63,7 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         configurator.respond(to: "/path", method: "GET")
-            .set(body: body)
+            .with(body: body)
             .once()
 
         MockURLResponder.setUp(with: configurator.arguments)
@@ -74,13 +74,13 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         let w3OrgConfigurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         w3OrgConfigurator.respond(to: "/path", method: "GET")
-            .set(body: "w3")
+            .with(body: "w3")
             .once()
 
         let googleConfigurator = MockURLResponderConfigurator(scheme: "https", host: "www.google.com")
 
         googleConfigurator.respond(to: "/path", method: "GET")
-            .set(body: "google")
+            .with(body: "google")
             .once()
 
         MockURLResponder.setUp(with: w3OrgConfigurator.arguments + googleConfigurator.arguments)
@@ -92,11 +92,11 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         configurator.respond(to: "/path/one", method: "GET")
-            .set(body: "one")
+            .with(body: "one")
             .once()
 
         configurator.respond(to: "/path/two", method: "GET")
-            .set(body: "two")
+            .with(body: "two")
             .once()
 
         MockURLResponder.setUp(with: configurator.arguments)
@@ -108,11 +108,11 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         configurator.respond(to: "/path", method: "GET")
-            .set(body: "one")
+            .with(body: "one")
             .once()
 
         configurator.respond(to: "/path", method: "GET")
-            .set(body: "two")
+            .with(body: "two")
             .once()
 
         MockURLResponder.setUp(with: configurator.arguments)
@@ -124,11 +124,11 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         configurator.respond(to: "/path", method: "GET")
-            .set(body: "one")
+            .with(body: "one")
             .times(2)
 
         configurator.respond(to: "/path", method: "GET")
-            .set(body: "three")
+            .with(body: "three")
             .once()
 
         MockURLResponder.setUp(with: configurator.arguments)
