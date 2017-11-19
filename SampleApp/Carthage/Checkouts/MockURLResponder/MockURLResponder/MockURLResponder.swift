@@ -9,16 +9,16 @@
 import UIKit
 
 public class MockURLResponder {
-	
+
+	public enum MockingBehaviour {
+		case allowNonMockedNetworkCalls
+		case dropNonMockedNetworkCalls
+		case preventNonMockedNetworkCalls
+	}
+
 	public struct Configuration {
 		static internal var responseHosts: [MockURLHostResponse]!
 		static public var mockingBehaviour: MockingBehaviour = .preventNonMockedNetworkCalls
-		
-		public enum MockingBehaviour {
-			case allowNonMockedNetworkCalls
-			case dropNonMockedNetworkCalls
-			case preventNonMockedNetworkCalls
-		}
 	}
 
     public static func setUp(with arguments: [String] = ProcessInfo.processInfo.arguments) {

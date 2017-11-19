@@ -19,36 +19,40 @@ class MockURLHostResponse {
 	let scheme: String
 	let host: String
 	let responses: [MockURLResponse]
-	
+
 	init(scheme: String, host: String, responses: [MockURLResponse]) {
 		self.scheme = scheme
 		self.host = host
 		self.responses = responses
 	}
-	
+
 	static func from(argument: String) -> MockURLHostResponse? {
 		guard argument.starts(with: "--mock-url-response=") else {
 			return nil
 		}
-		
-		let argumentData = argument.replacingOccurrences(of: "--mock-url-response=", with: "").data(using: .ascii)!
-		let jsonArgument = try! JSONSerialization.jsonObject(with: argumentData) as! [String: Any]
-		
-		return from(jsonArgument: jsonArgument)
+
+		let argumentString = argument.replacingOccurrences(of: "--mock-url-response=", with: "")
+		let argumentData = argumentString.data(using: .ascii)!
+		guard let jsonArgument = try? JSONSerialization.jsonObject(with: argumentData),
+			let jsonDictionary = jsonArgument as? [String: Any] else {
+			fatalError("Couldn't convert argument data to json object. Data received: \(argumentString)")
+		}
+
+		return from(jsonArgument: jsonDictionary)
 	}
-	
+
 	static func from(jsonArgument argument: [String: Any]) -> MockURLHostResponse {
 		guard let scheme = argument["scheme"] as? String,
 			let host = argument["host"] as? String,
 			let responses = argument["responses"] as? [[String: Any]] else {
 				fatalError("Unexpected nil values in MockURLHostResponse. Argument: \(argument)")
 		}
-		
+
 		return MockURLHostResponse(
 			scheme: scheme,
 			host: host,
 			responses: responses.map { MockURLResponse.from(argument: $0) }
 		)
 	}
-	
+
 }

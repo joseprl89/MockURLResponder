@@ -50,12 +50,12 @@ class MockURLResponderAcceptanceTests: XCTestCase {
 
     func test_mocksServerCanMockStatusCode() {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
-        
+
         configurator.respond(to: "/path", method: "GET")
             .with(body: body)
             .with(status: 400)
             .once()
-        
+
         MockURLResponder.setUp(with: configurator.arguments)
         XCTAssertEqual(getStatus("https://www.w3.org/path?q=query#fragment"), 400)
     }

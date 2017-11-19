@@ -16,7 +16,11 @@ public class MockURLResponderConfigurator {
     internal var responses: [MockURLResponse] = []
 
     public var arguments: [String] {
-        let stringJSONArgument = String(data: try! JSONSerialization.data(withJSONObject: jsonArguments), encoding: .ascii)!
+		guard let dataJSONArgument = try? JSONSerialization.data(withJSONObject: jsonArguments) else {
+			fatalError("Couldn't serialise arguments: \(jsonArguments)")
+		}
+
+        let stringJSONArgument = String(data: dataJSONArgument, encoding: .ascii)!
         return [
             "--mock-url-response=\(stringJSONArgument)"
         ]

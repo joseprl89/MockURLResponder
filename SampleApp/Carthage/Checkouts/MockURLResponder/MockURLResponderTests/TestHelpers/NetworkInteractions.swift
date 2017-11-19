@@ -57,7 +57,7 @@ func getError(_ url: String) -> Error {
 
     var result: Error!
 
-    URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+    URLSession.shared.dataTask(with: urlRequest) { data, _, error in
         XCTAssertNotNil(error)
         XCTAssertNil(data)
 
@@ -109,7 +109,7 @@ func submitRequest(method: HTTPMethod, url: String) -> String {
     let semaphore = DispatchSemaphore(value: 0)
 
     var result: String!
-    URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+    URLSession.shared.dataTask(with: urlRequest) { data, _, error in
         XCTAssertNil(error)
         XCTAssertNotNil(data)
         result = String(data: data!, encoding: .ascii)
