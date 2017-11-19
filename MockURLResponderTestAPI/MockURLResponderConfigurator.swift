@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MockURLResponder
 
 public class MockURLResponderConfigurator {
 
@@ -21,7 +22,7 @@ public class MockURLResponderConfigurator {
         ]
     }
 
-    private var jsonArguments: [String: Any] {
+    public var jsonArguments: [String: Any] {
         return [
             "scheme": scheme,
             "host": host,

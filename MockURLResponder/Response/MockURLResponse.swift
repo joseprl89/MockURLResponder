@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MockURLResponse {
+public class MockURLResponse {
 	
 	let path: String
 	let method: String
@@ -19,7 +19,7 @@ class MockURLResponse {
 	let delay: TimeInterval
 	private(set) var repetitionsLeft: Int
 	
-	init(path: String, method: String, dropConnection: Bool, status: Int, headerFields: [String: String], body: String, repetitionsLeft: Int, delay: TimeInterval) {
+	public init(path: String, method: String, dropConnection: Bool, status: Int, headerFields: [String: String], body: String, repetitionsLeft: Int, delay: TimeInterval) {
 		self.path = path
 		self.dropConnection = dropConnection
 		self.method = method
@@ -30,7 +30,7 @@ class MockURLResponse {
 		self.delay = delay
 	}
 	
-	var jsonArguments: [String: Any] {
+	public var jsonArguments: [String: Any] {
 		return [
 			"path": path,
 			"method": method,

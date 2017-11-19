@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "92285AE31FC07470001D5E1B"
-               BuildableName = "MockURLResponderKit.framework"
-               BlueprintName = "MockURLResponderKit"
-               ReferencedContainer = "container:MockURLResponderKit.xcodeproj">
+               BuildableName = "MockURLResponder.framework"
+               BlueprintName = "MockURLResponder"
+               ReferencedContainer = "container:MockURLResponder.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,9 +34,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "92285AF21FC0750E001D5E1B"
-               BuildableName = "MockURLResponderKitTests.xctest"
-               BlueprintName = "MockURLResponderKitTests"
-               ReferencedContainer = "container:MockURLResponderKit.xcodeproj">
+               BuildableName = "MockURLResponderTests.xctest"
+               BlueprintName = "MockURLResponderTests"
+               ReferencedContainer = "container:MockURLResponder.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -44,9 +44,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "92285AE31FC07470001D5E1B"
-            BuildableName = "MockURLResponderKit.framework"
-            BlueprintName = "MockURLResponderKit"
-            ReferencedContainer = "container:MockURLResponderKit.xcodeproj">
+            BuildableName = "MockURLResponder.framework"
+            BlueprintName = "MockURLResponder"
+            ReferencedContainer = "container:MockURLResponder.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -67,9 +67,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "92285AE31FC07470001D5E1B"
-            BuildableName = "MockURLResponderKit.framework"
-            BlueprintName = "MockURLResponderKit"
-            ReferencedContainer = "container:MockURLResponderKit.xcodeproj">
+            BuildableName = "MockURLResponder.framework"
+            BlueprintName = "MockURLResponder"
+            ReferencedContainer = "container:MockURLResponder.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -85,9 +85,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "92285AE31FC07470001D5E1B"
-            BuildableName = "MockURLResponderKit.framework"
-            BlueprintName = "MockURLResponderKit"
-            ReferencedContainer = "container:MockURLResponderKit.xcodeproj">
+            BuildableName = "MockURLResponder.framework"
+            BlueprintName = "MockURLResponder"
+            ReferencedContainer = "container:MockURLResponder.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

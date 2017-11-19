@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import MockURLResponderKit
+import MockURLResponder
 
 func get(_ url: String) -> String {
     return submitRequest(method: .GET, url: url)

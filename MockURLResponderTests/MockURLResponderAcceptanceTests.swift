@@ -7,7 +7,8 @@
 //
 
 import XCTest
-import MockURLResponderKit
+import MockURLResponder
+import MockURLResponderTestAPI
 
 class MockURLResponderAcceptanceTests: XCTestCase {
 
