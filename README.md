@@ -28,6 +28,8 @@ Once you have the built frameworks, drag and drop them into the targets that are
 
 If you encounter the image not found in the app target, go to `Project` > `App Target` > `General` tab and add the framework in the `Embedded binaries` box.
 
+This is related to [this issue](https://github.com/Carthage/Carthage/issues/635)
+
 ### Image not found in test target
 
 Follow the instructions [here](http://www.mokacoding.com/blog/setting-up-testing-libraries-with-carthage-xcode7/). In the sample app, it meant adding to the `Build phases` a bash script running:
@@ -41,6 +43,7 @@ Using as input:
 `$(PROJECT_DIR)/Carthage/Build/iOS/MockURLResponderTestAPI.framework`
 `$(PROJECT_DIR)/Carthage/Build/iOS/MockURLResponder.framework`
 
+This is related to [this issue](https://github.com/Carthage/Carthage/issues/635)
 
 **Cocoapods is not supported. PRs welcome.**
 
