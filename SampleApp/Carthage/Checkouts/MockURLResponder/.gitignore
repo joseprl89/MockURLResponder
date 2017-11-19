@@ -77,11 +77,4 @@ fastlane/test_output
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
 
-### Carthage ###
-# Carthage
-#
-# Add this line if you want to avoid checking in source code from Carthage dependencies.
-SampleApp/Carthage/Checkouts
-SampleApp/Carthage/Build
-
 # End of https://www.gitignore.io/api/xcode,swift
