@@ -12,7 +12,7 @@ public class MockURLResponder {
 	
 	public struct Configuration {
 		static internal var responseHosts: [MockURLHostResponse]!
-		static internal var mockingBehaviour: MockingBehaviour = .preventNonMockedNetworkCalls
+		static public var mockingBehaviour: MockingBehaviour = .preventNonMockedNetworkCalls
 		
 		public enum MockingBehaviour {
 			case allowNonMockedNetworkCalls
