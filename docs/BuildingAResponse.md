@@ -40,6 +40,12 @@ configurator.respond(to: "/path", method: "GET")
 
 Allows to load a resource from the bundle and pass it as a body in the response.
 
+```
+configurator.respond(to: "/path", method: "GET")
+    .with(resource: "test", ofType: "json", bundle: Bundle(for: MockURLResponderAcceptanceTests.self))
+    .once()
+```
+
 ## with(status: ...)
 
 Allows to specify the HTTP status code to pass in the response.
