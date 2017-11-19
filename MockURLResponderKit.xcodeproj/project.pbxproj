@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		727966DD1FC1827E005A6551 /* MockURLHostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727966DC1FC1827E005A6551 /* MockURLHostResponse.swift */; };
+		727966DF1FC182C3005A6551 /* MockURLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727966DE1FC182C3005A6551 /* MockURLResponse.swift */; };
+		727966E21FC18330005A6551 /* MockURLResponseBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727966E11FC18330005A6551 /* MockURLResponseBuilder.swift */; };
 		92285AE91FC07470001D5E1B /* MockURLResponderKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 92285AE71FC07470001D5E1B /* MockURLResponderKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		92285AF81FC0750E001D5E1B /* MockURLResponderKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92285AE41FC07470001D5E1B /* MockURLResponderKit.framework */; };
 		92285B0E1FC0759D001D5E1B /* MockURLResponderAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92285B0D1FC0759D001D5E1B /* MockURLResponderAcceptanceTests.swift */; };
@@ -27,6 +30,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		727966DC1FC1827E005A6551 /* MockURLHostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLHostResponse.swift; sourceTree = "<group>"; };
+		727966DE1FC182C3005A6551 /* MockURLResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLResponse.swift; sourceTree = "<group>"; };
+		727966E11FC18330005A6551 /* MockURLResponseBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLResponseBuilder.swift; sourceTree = "<group>"; };
 		92285AE41FC07470001D5E1B /* MockURLResponderKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MockURLResponderKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92285AE71FC07470001D5E1B /* MockURLResponderKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MockURLResponderKit.h; sourceTree = "<group>"; };
 		92285AE81FC07470001D5E1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -58,6 +64,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		727966D91FC18246005A6551 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				92285AE71FC07470001D5E1B /* MockURLResponderKit.h */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		727966DA1FC18255005A6551 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				727966DC1FC1827E005A6551 /* MockURLHostResponse.swift */,
+				727966DE1FC182C3005A6551 /* MockURLResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		727966E01FC18321005A6551 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				92285B111FC07753001D5E1B /* MockURLResponderConfigurator.swift */,
+				727966E11FC18330005A6551 /* MockURLResponseBuilder.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
 		92285ADA1FC07470001D5E1B = {
 			isa = PBXGroup;
 			children = (
@@ -80,10 +112,11 @@
 		92285AE61FC07470001D5E1B /* MockURLResponderKit */ = {
 			isa = PBXGroup;
 			children = (
-				92285AE71FC07470001D5E1B /* MockURLResponderKit.h */,
-				92285AE81FC07470001D5E1B /* Info.plist */,
+				727966E01FC18321005A6551 /* Configurator */,
+				727966DA1FC18255005A6551 /* Response */,
+				727966D91FC18246005A6551 /* Supporting Files */,
 				92285B181FC07B97001D5E1B /* MockURLResponder.swift */,
-				92285B111FC07753001D5E1B /* MockURLResponderConfigurator.swift */,
+				92285AE81FC07470001D5E1B /* Info.plist */,
 			);
 			path = MockURLResponderKit;
 			sourceTree = "<group>";
@@ -234,7 +267,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				727966DF1FC182C3005A6551 /* MockURLResponse.swift in Sources */,
 				92285B191FC07B97001D5E1B /* MockURLResponder.swift in Sources */,
+				727966E21FC18330005A6551 /* MockURLResponseBuilder.swift in Sources */,
+				727966DD1FC1827E005A6551 /* MockURLHostResponse.swift in Sources */,
 				92285B1A1FC08053001D5E1B /* MockURLResponderConfigurator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
