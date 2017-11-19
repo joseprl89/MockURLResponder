@@ -1,5 +1,5 @@
 language: objective-c
 osx_image: xcode9.1
-xcode_workspace: MockURLResponder.xcworkspace
-xcode_scheme: MockURLResponder
 
+script: xcodebuild -workspace MockURLResponder.xcworkspace -scheme MockURLResponder -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+script: xcodebuild test -workspace MockURLResponder.xcworkspace -scheme MockURLResponder -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6,OS=11.1'
