@@ -78,6 +78,12 @@ configurator.respond(to: "/path", method: "GET")
 
 Delays the response for as many seconds as specified in the parameter, passed as a TimeInterval (double). Useful when testing that a loading spinner appears.
 
+```
+configurator.respond(to: "/path", method: "GET")
+    .with(body: "Hi!")
+    .once()
+```
+
 # Multiple Responses Same Request
 
 It is mandatory to specify how many times a response should be executed. We provide three methods to do so:
@@ -89,6 +95,7 @@ Uses the response once.
 ```
 configurator.respond(to: "/path", method: "GET")
     .with(body: "Hi!")
+    .with(delay: 10) // seconds
     .once()
 ```
 
