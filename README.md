@@ -1,6 +1,6 @@
 # MockURLResponder
 
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=5a11c0d7ec4ba100010e5a4f&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/5a11c0d7ec4ba100010e5a4f/build/latest?branch=master) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 An iOS network mocking DSL library with minimal setup required.
 
