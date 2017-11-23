@@ -4,6 +4,22 @@
 
 An iOS network mocking DSL library with minimal setup required.
 
+# See it in action
+
+The goal of this library is to provide a very simple way to mock the network calls your app performs, in a very unobtrusive way. As an example, you could setup what each UI test executes by using something similar to the following snippet:
+
+```
+let configurator = MockURLResponderConfigurator(scheme: "https", host: "api.myawesomeapp.com")
+
+configurator.respond(to: "/path/to/resource", method: "GET")
+	.with(body: "{ \"json\": 123 }")
+	.always()
+	
+let application = XCUIApplication()
+application.launchArguments = ["-MyCustomArgument"] + configurator.arguments + configuratorTwo.arguments
+application.launch()
+```
+
 # Getting started
 
 ## Installation with Carthage
