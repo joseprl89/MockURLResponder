@@ -15,6 +15,14 @@
 		7279670F1FC18C12005A6551 /* MockURLResponderConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92285B111FC07753001D5E1B /* MockURLResponderConfigurator.swift */; };
 		727967101FC18C22005A6551 /* MockURLResponder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92285AE41FC07470001D5E1B /* MockURLResponder.framework */; };
 		727967111FC18C75005A6551 /* MockURLResponderTestAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 727967061FC18B79005A6551 /* MockURLResponderTestAPI.framework */; };
+		728CEACB1FC76EBB003230CF /* MockURLRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 728CEAC91FC76EBB003230CF /* MockURLRecorder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		728CEAD01FC76EDE003230CF /* MockURLRecorderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CEACF1FC76EDE003230CF /* MockURLRecorderProtocol.swift */; };
+		728CEAD21FC773B5003230CF /* MockURLRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CEAD11FC773B5003230CF /* MockURLRecorder.swift */; };
+		728CEAD41FC774DB003230CF /* MockURLRecorderAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CEAD31FC774DB003230CF /* MockURLRecorderAcceptanceTests.swift */; };
+		728CEAD71FC775F1003230CF /* MockURLRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728CEAC71FC76EBB003230CF /* MockURLRecorder.framework */; };
+		728CEAD91FC77835003230CF /* ConfiguratorDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CEAD81FC77835003230CF /* ConfiguratorDSL.swift */; };
+		728CEADE1FC77BC5003230CF /* getCall.txt in Resources */ = {isa = PBXBuildFile; fileRef = 728CEADD1FC77BC5003230CF /* getCall.txt */; };
+		728CEAE01FC77C07003230CF /* FileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CEADF1FC77C07003230CF /* FileSystem.swift */; };
 		92285AE91FC07470001D5E1B /* MockURLResponder.h in Headers */ = {isa = PBXBuildFile; fileRef = 92285AE71FC07470001D5E1B /* MockURLResponder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		92285AF81FC0750E001D5E1B /* MockURLResponder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92285AE41FC07470001D5E1B /* MockURLResponder.framework */; };
 		92285B0E1FC0759D001D5E1B /* MockURLResponderAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92285B0D1FC0759D001D5E1B /* MockURLResponderAcceptanceTests.swift */; };
@@ -30,6 +38,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 727967051FC18B79005A6551;
 			remoteInfo = MockURLResponderTestAPI;
+		};
+		728CEAD51FC775E9003230CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 92285ADB1FC07470001D5E1B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 728CEAC61FC76EBB003230CF;
+			remoteInfo = MockURLRecorder;
 		};
 		92285AF91FC0750E001D5E1B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -48,6 +63,15 @@
 		727967061FC18B79005A6551 /* MockURLResponderTestAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MockURLResponderTestAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		727967081FC18B79005A6551 /* MockURLResponderTestAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MockURLResponderTestAPI.h; sourceTree = "<group>"; };
 		727967091FC18B79005A6551 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		728CEAC71FC76EBB003230CF /* MockURLRecorder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MockURLRecorder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		728CEAC91FC76EBB003230CF /* MockURLRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MockURLRecorder.h; sourceTree = "<group>"; };
+		728CEACA1FC76EBB003230CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		728CEACF1FC76EDE003230CF /* MockURLRecorderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLRecorderProtocol.swift; sourceTree = "<group>"; };
+		728CEAD11FC773B5003230CF /* MockURLRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLRecorder.swift; sourceTree = "<group>"; };
+		728CEAD31FC774DB003230CF /* MockURLRecorderAcceptanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLRecorderAcceptanceTests.swift; sourceTree = "<group>"; };
+		728CEAD81FC77835003230CF /* ConfiguratorDSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfiguratorDSL.swift; sourceTree = "<group>"; };
+		728CEADD1FC77BC5003230CF /* getCall.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = getCall.txt; sourceTree = "<group>"; };
+		728CEADF1FC77C07003230CF /* FileSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystem.swift; sourceTree = "<group>"; };
 		92285AE41FC07470001D5E1B /* MockURLResponder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MockURLResponder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92285AE71FC07470001D5E1B /* MockURLResponder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MockURLResponder.h; sourceTree = "<group>"; };
 		92285AE81FC07470001D5E1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -69,6 +93,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		728CEAC31FC76EBB003230CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		92285AE01FC07470001D5E1B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -80,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				728CEAD71FC775F1003230CF /* MockURLRecorder.framework in Frameworks */,
 				727967111FC18C75005A6551 /* MockURLResponderTestAPI.framework in Frameworks */,
 				92285AF81FC0750E001D5E1B /* MockURLResponder.framework in Frameworks */,
 			);
@@ -116,10 +148,30 @@
 			path = MockURLResponderTestAPI;
 			sourceTree = "<group>";
 		};
+		728CEAC81FC76EBB003230CF /* MockURLRecorder */ = {
+			isa = PBXGroup;
+			children = (
+				728CEAC91FC76EBB003230CF /* MockURLRecorder.h */,
+				728CEACA1FC76EBB003230CF /* Info.plist */,
+				728CEACF1FC76EDE003230CF /* MockURLRecorderProtocol.swift */,
+				728CEAD11FC773B5003230CF /* MockURLRecorder.swift */,
+			);
+			path = MockURLRecorder;
+			sourceTree = "<group>";
+		};
+		728CEADA1FC77B8C003230CF /* RecorderSnippets */ = {
+			isa = PBXGroup;
+			children = (
+				728CEADD1FC77BC5003230CF /* getCall.txt */,
+			);
+			path = RecorderSnippets;
+			sourceTree = "<group>";
+		};
 		92285ADA1FC07470001D5E1B = {
 			isa = PBXGroup;
 			children = (
 				92285AE61FC07470001D5E1B /* MockURLResponder */,
+				728CEAC81FC76EBB003230CF /* MockURLRecorder */,
 				727967071FC18B79005A6551 /* MockURLResponderTestAPI */,
 				92285AF41FC0750E001D5E1B /* MockURLResponderTests */,
 				92285AE51FC07470001D5E1B /* Products */,
@@ -133,6 +185,7 @@
 				92285AE41FC07470001D5E1B /* MockURLResponder.framework */,
 				92285AF31FC0750E001D5E1B /* MockURLResponderTests.xctest */,
 				727967061FC18B79005A6551 /* MockURLResponderTestAPI.framework */,
+				728CEAC71FC76EBB003230CF /* MockURLRecorder.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -153,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				92285B0D1FC0759D001D5E1B /* MockURLResponderAcceptanceTests.swift */,
+				728CEAD31FC774DB003230CF /* MockURLRecorderAcceptanceTests.swift */,
 				92285B151FC079C1001D5E1B /* TestHelpers */,
 				92285B1B1FC0B19C001D5E1B /* TestFiles */,
 				92285AF71FC0750E001D5E1B /* Info.plist */,
@@ -171,6 +225,8 @@
 			isa = PBXGroup;
 			children = (
 				92285B161FC079D0001D5E1B /* NetworkInteractions.swift */,
+				728CEAD81FC77835003230CF /* ConfiguratorDSL.swift */,
+				728CEADF1FC77C07003230CF /* FileSystem.swift */,
 			);
 			path = TestHelpers;
 			sourceTree = "<group>";
@@ -178,6 +234,7 @@
 		92285B1B1FC0B19C001D5E1B /* TestFiles */ = {
 			isa = PBXGroup;
 			children = (
+				728CEADA1FC77B8C003230CF /* RecorderSnippets */,
 				92285B1C1FC0B1B7001D5E1B /* test.json */,
 			);
 			path = TestFiles;
@@ -191,6 +248,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7279670A1FC18B79005A6551 /* MockURLResponderTestAPI.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		728CEAC41FC76EBB003230CF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				728CEACB1FC76EBB003230CF /* MockURLRecorder.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,6 +288,24 @@
 			productReference = 727967061FC18B79005A6551 /* MockURLResponderTestAPI.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		728CEAC61FC76EBB003230CF /* MockURLRecorder */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 728CEACE1FC76EBB003230CF /* Build configuration list for PBXNativeTarget "MockURLRecorder" */;
+			buildPhases = (
+				728CEAC21FC76EBB003230CF /* Sources */,
+				728CEAC31FC76EBB003230CF /* Frameworks */,
+				728CEAC41FC76EBB003230CF /* Headers */,
+				728CEAC51FC76EBB003230CF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MockURLRecorder;
+			productName = MockURLRecorder;
+			productReference = 728CEAC71FC76EBB003230CF /* MockURLRecorder.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		92285AE31FC07470001D5E1B /* MockURLResponder */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 92285AEC1FC07470001D5E1B /* Build configuration list for PBXNativeTarget "MockURLResponder" */;
@@ -253,6 +336,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				728CEAD61FC775E9003230CF /* PBXTargetDependency */,
 				727967131FC18C78005A6551 /* PBXTargetDependency */,
 				92285AFA1FC0750E001D5E1B /* PBXTargetDependency */,
 			);
@@ -273,6 +357,11 @@
 				TargetAttributes = {
 					727967051FC18B79005A6551 = {
 						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
+					728CEAC61FC76EBB003230CF = {
+						CreatedOnToolsVersion = 9.1;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
 					92285AE31FC07470001D5E1B = {
@@ -299,6 +388,7 @@
 			projectRoot = "";
 			targets = (
 				92285AE31FC07470001D5E1B /* MockURLResponder */,
+				728CEAC61FC76EBB003230CF /* MockURLRecorder */,
 				727967051FC18B79005A6551 /* MockURLResponderTestAPI */,
 				92285AF21FC0750E001D5E1B /* MockURLResponderTests */,
 			);
@@ -307,6 +397,13 @@
 
 /* Begin PBXResourcesBuildPhase section */
 		727967041FC18B79005A6551 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		728CEAC51FC76EBB003230CF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -325,6 +422,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92285B1D1FC0B1B7001D5E1B /* test.json in Resources */,
+				728CEADE1FC77BC5003230CF /* getCall.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +455,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		728CEAC21FC76EBB003230CF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				728CEAD01FC76EDE003230CF /* MockURLRecorderProtocol.swift in Sources */,
+				728CEAD21FC773B5003230CF /* MockURLRecorder.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		92285ADF1FC07470001D5E1B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -372,7 +479,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				728CEAD41FC774DB003230CF /* MockURLRecorderAcceptanceTests.swift in Sources */,
+				728CEAE01FC77C07003230CF /* FileSystem.swift in Sources */,
 				92285B171FC079D0001D5E1B /* NetworkInteractions.swift in Sources */,
+				728CEAD91FC77835003230CF /* ConfiguratorDSL.swift in Sources */,
 				92285B0E1FC0759D001D5E1B /* MockURLResponderAcceptanceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -384,6 +494,11 @@
 			isa = PBXTargetDependency;
 			target = 727967051FC18B79005A6551 /* MockURLResponderTestAPI */;
 			targetProxy = 727967121FC18C78005A6551 /* PBXContainerItemProxy */;
+		};
+		728CEAD61FC775E9003230CF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 728CEAC61FC76EBB003230CF /* MockURLRecorder */;
+			targetProxy = 728CEAD51FC775E9003230CF /* PBXContainerItemProxy */;
 		};
 		92285AFA1FC0750E001D5E1B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -428,6 +543,51 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.joseprl89.MockURLResponderTestAPI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		728CEACC1FC76EBB003230CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = MockURLRecorder/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.joseprl89.MockURLRecorder;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		728CEACD1FC76EBB003230CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = MockURLRecorder/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.joseprl89.MockURLRecorder;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -627,6 +787,15 @@
 			buildConfigurations = (
 				7279670B1FC18B79005A6551 /* Debug */,
 				7279670C1FC18B79005A6551 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		728CEACE1FC76EBB003230CF /* Build configuration list for PBXNativeTarget "MockURLRecorder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				728CEACC1FC76EBB003230CF /* Debug */,
+				728CEACD1FC76EBB003230CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

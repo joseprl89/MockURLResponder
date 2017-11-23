@@ -29,16 +29,6 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "92285AF21FC0750E001D5E1B"
-               BuildableName = "MockURLResponderTests.xctest"
-               BlueprintName = "MockURLResponderTests"
-               ReferencedContainer = "container:MockURLResponder.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

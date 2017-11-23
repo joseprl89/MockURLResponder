@@ -11,6 +11,10 @@ import Foundation
 public class MockURLProtocol: URLProtocol {
 
 	override public class func canInit(with request: URLRequest) -> Bool {
+        guard isHTTP(request) else {
+            return false
+        }
+
 		switch MockURLResponder.Configuration.mockingBehaviour {
 		case .allowNonMockedNetworkCalls:
 			return matchingResponse(forRequest: request) != nil
@@ -18,6 +22,10 @@ public class MockURLProtocol: URLProtocol {
 			return true
 		}
 	}
+    
+    private class func isHTTP(_ request: URLRequest) -> Bool {
+        return ["http", "https"].contains(request.url?.scheme ?? "")
+    }
 
 	override open class func canonicalRequest(for request: URLRequest) -> URLRequest {
 		return request

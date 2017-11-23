@@ -18,7 +18,7 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         MockURLResponder.tearDown()
     }
 
-    func test_mocksSingleCall() {
+    func testSingleCall() {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         configurator.respond(to: "/path", method: "GET")
@@ -30,7 +30,7 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         XCTAssertEqual(get("https://www.w3.org/path?q=query#fragment"), body)
     }
 
-    func test_mocksPOSTWithoutConflictOnGet() {
+    func testPOSTWithoutConflictOnGet() {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         configurator.respond(to: "/path", method: "GET")
@@ -48,7 +48,7 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         XCTAssertNotEqual(bodyReceived, body)
     }
 
-    func test_mocksServerCanMockStatusCode() {
+    func testMocksStatusCode() {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         configurator.respond(to: "/path", method: "GET")
@@ -60,7 +60,7 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         XCTAssertEqual(getStatus("https://www.w3.org/path?q=query#fragment"), 400)
     }
 
-    func test_mocksServerDefaultsTo200() {
+    func testDefaultsTo200() {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         configurator.respond(to: "/path", method: "GET")
@@ -71,7 +71,7 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         XCTAssertEqual(getStatus("https://www.w3.org/path?q=query#fragment"), 200)
     }
 
-    func test_mocksServerCanMockMultipleHostsAtOnce() {
+    func testMocksMultipleHostsAtOnce() {
         let w3OrgConfigurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         w3OrgConfigurator.respond(to: "/path", method: "GET")
@@ -89,7 +89,7 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         XCTAssertEqual(get("https://www.w3.org/path"), "w3")
     }
 
-    func test_mocksServerCanMockMultiplePathsAtOnce() {
+    func testMocksMultiplePathsAtOnce() {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         configurator.respond(to: "/path/one", method: "GET")
@@ -105,7 +105,7 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         XCTAssertEqual(get("https://www.w3.org/path/two"), "two")
     }
 
-    func test_mocksServerCanMockMultipleResponsesSerially() {
+    func testMocksMultipleResponsesSerially() {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         configurator.respond(to: "/path", method: "GET")
@@ -121,7 +121,7 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         XCTAssertEqual(get("https://www.w3.org/path"), "two")
     }
 
-    func test_mocksServerCanRepeatResponses() {
+    func testRepeatsResponses() {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         configurator.respond(to: "/path", method: "GET")
@@ -139,7 +139,7 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         XCTAssertEqual(get("https://www.w3.org/path"), "three")
     }
 
-    func test_mocksServerCanRepeatResponsesForever() {
+    func testRepeatsResponsesForever() {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         configurator.respond(to: "/path", method: "GET")
@@ -153,7 +153,7 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         }
     }
 
-    func test_dropsConnections() {
+    func testDropsConnections() {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         configurator.respond(to: "/path", method: "GET")
@@ -165,7 +165,7 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         XCTAssertNotNil(getError("https://www.w3.org/path"))
     }
 
-    func test_addsDelay() {
+    func testAddsDelay() {
         let delay: TimeInterval = 0.2
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
@@ -182,7 +182,7 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         XCTAssertGreaterThan(endTime.timeIntervalSince(startTime), delay)
     }
 
-    func test_isCompatibleWithExtraArguments() {
+    func testIsCompatibleWithExtraArguments() {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         configurator.respond(to: "/path", method: "GET")
@@ -194,7 +194,7 @@ class MockURLResponderAcceptanceTests: XCTestCase {
         XCTAssertEqual(get("https://www.w3.org/path"), "response")
     }
 
-    func test_supportsFileAsBodyResponse() {
+    func testSupportsFileAsBodyResponse() {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         configurator.respond(to: "/path", method: "GET")
