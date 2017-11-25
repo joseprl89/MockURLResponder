@@ -37,7 +37,7 @@ internal class MockURLRecorderAcceptanceTests: XCTestCase {
         XCTAssertEqual(MockURLRecorder.replayCode, contentsOf("getTwoCallsDifferentResponses", ofType: "txt"))
     }
 
-    func testRecordsGetTwoCallsSameResponseCollapsing() {
+    func testRecordsGetTwoCallsSameResponseMerge() {
         MockURLResponder.setUp(with:
             mockFor(url, method: "GET", withResponse: "Hi") +
             mockFor(url, method: "GET", withResponse: "Hi")
@@ -48,5 +48,20 @@ internal class MockURLRecorderAcceptanceTests: XCTestCase {
         _ = get(url.absoluteString)
 
         XCTAssertEqual(MockURLRecorder.replayCode, contentsOf("getTwoCallsSameResponses", ofType: "txt"))
+    }
+
+    func testRecordsGetABACallsDoesNotMergeAndKeepsOrder() {
+        MockURLResponder.setUp(with:
+            mockFor(url, method: "GET", withResponse: "Hi") +
+            mockFor(url, method: "GET", withResponse: "Hi 2") +
+            mockFor(url, method: "GET", withResponse: "Hi")
+        )
+        recordingSession()
+
+        _ = get(url.absoluteString)
+        _ = get(url.absoluteString)
+        _ = get(url.absoluteString)
+
+        XCTAssertEqual(MockURLRecorder.replayCode, contentsOf("getThreeCallsRespondingABADoesNotMerge", ofType: "txt"))
     }
 }

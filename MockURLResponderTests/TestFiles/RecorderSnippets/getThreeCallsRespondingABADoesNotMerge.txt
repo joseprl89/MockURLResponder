@@ -1,0 +1,13 @@
+let configurator = MockURLResponderConfigurator(scheme: "http", host: "www.google.com")
+
+configurator.respond(to: "/search", method: "GET")
+    .with(body: "Hi")
+    .once()
+
+configurator.respond(to: "/search", method: "GET")
+    .with(body: "Hi 2")
+    .once()
+
+configurator.respond(to: "/search", method: "GET")
+    .with(body: "Hi")
+    .once()

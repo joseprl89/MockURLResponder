@@ -42,8 +42,8 @@ internal class RecordedInteractionsOnHost {
     func record(_ response: HTTPURLResponse, for request: URLRequest, body bodyData: Data?) {
         let interaction = RecordedInteraction(response: response, request: request, body: bodyData)
 
-        if let recordedInteraction = interactions.first(where: { $0 == interaction }) {
-            recordedInteraction.wasRepeated()
+        if let lastRecordedInteraction = interactions.last, lastRecordedInteraction == interaction {
+            lastRecordedInteraction.wasRepeated()
         } else {
             interactions += [interaction]
         }

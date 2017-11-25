@@ -27,6 +27,7 @@
 		72E0F0F91FC97E7A007B9C0C /* getTwoCallsSameResponses.txt in Resources */ = {isa = PBXBuildFile; fileRef = 72E0F0F81FC97E7A007B9C0C /* getTwoCallsSameResponses.txt */; };
 		72E0F0FB1FC980D0007B9C0C /* RecordedInteractionsOnHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E0F0FA1FC980D0007B9C0C /* RecordedInteractionsOnHost.swift */; };
 		72E0F0FD1FC984B9007B9C0C /* RecordedInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E0F0FC1FC984B9007B9C0C /* RecordedInteraction.swift */; };
+		72E0F0FF1FC98BB3007B9C0C /* getThreeCallsRespondingABADoesNotMerge.txt in Resources */ = {isa = PBXBuildFile; fileRef = 72E0F0FE1FC98BB3007B9C0C /* getThreeCallsRespondingABADoesNotMerge.txt */; };
 		92285AE91FC07470001D5E1B /* MockURLResponder.h in Headers */ = {isa = PBXBuildFile; fileRef = 92285AE71FC07470001D5E1B /* MockURLResponder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		92285AF81FC0750E001D5E1B /* MockURLResponder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92285AE41FC07470001D5E1B /* MockURLResponder.framework */; };
 		92285B0E1FC0759D001D5E1B /* MockURLResponderAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92285B0D1FC0759D001D5E1B /* MockURLResponderAcceptanceTests.swift */; };
@@ -80,6 +81,7 @@
 		72E0F0F81FC97E7A007B9C0C /* getTwoCallsSameResponses.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = getTwoCallsSameResponses.txt; sourceTree = "<group>"; };
 		72E0F0FA1FC980D0007B9C0C /* RecordedInteractionsOnHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordedInteractionsOnHost.swift; sourceTree = "<group>"; };
 		72E0F0FC1FC984B9007B9C0C /* RecordedInteraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordedInteraction.swift; sourceTree = "<group>"; };
+		72E0F0FE1FC98BB3007B9C0C /* getThreeCallsRespondingABADoesNotMerge.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = getThreeCallsRespondingABADoesNotMerge.txt; sourceTree = "<group>"; };
 		92285AE41FC07470001D5E1B /* MockURLResponder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MockURLResponder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92285AE71FC07470001D5E1B /* MockURLResponder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MockURLResponder.h; sourceTree = "<group>"; };
 		92285AE81FC07470001D5E1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				728CEADD1FC77BC5003230CF /* getCall.txt */,
 				728CEAE11FC7810E003230CF /* getTwoCallsDifferentResponses.txt */,
 				72E0F0F81FC97E7A007B9C0C /* getTwoCallsSameResponses.txt */,
+				72E0F0FE1FC98BB3007B9C0C /* getThreeCallsRespondingABADoesNotMerge.txt */,
 			);
 			path = RecorderSnippets;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72E0F0FF1FC98BB3007B9C0C /* getThreeCallsRespondingABADoesNotMerge.txt in Resources */,
 				728CEAE21FC7810E003230CF /* getTwoCallsDifferentResponses.txt in Resources */,
 				92285B1D1FC0B1B7001D5E1B /* test.json in Resources */,
 				728CEADE1FC77BC5003230CF /* getCall.txt in Resources */,
