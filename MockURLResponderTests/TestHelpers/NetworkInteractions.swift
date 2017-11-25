@@ -9,15 +9,15 @@
 import XCTest
 import MockURLResponder
 
-func get(_ url: String) -> String {
+internal func get(_ url: String) -> String {
     return submitRequest(method: .GET, url: url)
 }
 
-func post(_ url: String) -> String {
+internal func post(_ url: String) -> String {
     return submitRequest(method: .POST, url: url)
 }
 
-func getStatus(_ url: String) -> Int {
+internal func getStatus(_ url: String) -> Int {
     guard let urlBuilt = URL(string: url) else {
         fatalError("Couldn't create a url request from \(url)")
     }
@@ -45,7 +45,7 @@ func getStatus(_ url: String) -> Int {
     return resultStatus
 }
 
-func getError(_ url: String) -> Error {
+internal func getError(_ url: String) -> Error {
     guard let urlBuilt = URL(string: url) else {
         fatalError("Couldn't create a url request from \(url)")
     }
@@ -70,7 +70,7 @@ func getError(_ url: String) -> Error {
     return result
 }
 
-func getHeaders(_ url: String) -> [String: String] {
+internal func getHeaders(_ url: String) -> [String: String] {
     guard let urlBuilt = URL(string: url) else {
         fatalError("Couldn't create a url request from \(url)")
     }
@@ -98,7 +98,7 @@ func getHeaders(_ url: String) -> [String: String] {
     return result
 }
 
-func submitRequest(method: HTTPMethod, url: String) -> String {
+internal func submitRequest(method: HTTPMethod, url: String) -> String {
     guard let urlBuilt = URL(string: url) else {
         fatalError("Couldn't create a url request from \(url)")
     }

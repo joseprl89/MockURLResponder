@@ -9,7 +9,7 @@
 import XCTest
 import MockURLResponderTestAPI
 
-class MockURLResponderSampleAppUITests: XCTestCase {
+internal class MockURLResponderSampleAppUITests: XCTestCase {
 
     func test_mocksNetwork() {
 		let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.google.com")

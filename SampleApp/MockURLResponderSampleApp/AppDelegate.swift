@@ -10,7 +10,7 @@ import UIKit
 import MockURLResponder
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+internal class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
 

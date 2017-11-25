@@ -15,7 +15,7 @@ public enum HTTPMethod: String {
 	case HEAD
 }
 
-class MockURLHostResponse {
+internal class MockURLHostResponse {
 	let scheme: String
 	let host: String
 	let responses: [MockURLResponse]

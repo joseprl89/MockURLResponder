@@ -1,2 +1,4 @@
+opt_in_rules:
+  - explicit_top_level_acl
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - SampleApp/Carthage

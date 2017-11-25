@@ -8,8 +8,9 @@
 
 import XCTest
 
-func contentsOf(_ fileName: String, ofType ext: String) -> String {
-    guard let url = Bundle(for: MockURLRecorderAcceptanceTests.self).url(forResource: fileName, withExtension: ext) else {
+internal func contentsOf(_ fileName: String, ofType ext: String) -> String {
+    let bundle = Bundle(for: MockURLRecorderAcceptanceTests.self)
+    guard let url = bundle.url(forResource: fileName, withExtension: ext) else {
         XCTFail("No such file \(fileName).\(ext)")
         return ""
     }

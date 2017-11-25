@@ -11,7 +11,7 @@ import MockURLResponder
 import MockURLResponderTestAPI
 import MockURLRecorder
 
-class MockURLRecorderAcceptanceTests: XCTestCase {
+internal class MockURLRecorderAcceptanceTests: XCTestCase {
 
     let url = URL(string: "http://www.google.com/search?q=something")!
 

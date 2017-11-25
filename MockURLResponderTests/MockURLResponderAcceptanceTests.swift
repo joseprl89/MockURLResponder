@@ -10,7 +10,7 @@ import XCTest
 import MockURLResponder
 import MockURLResponderTestAPI
 
-class MockURLResponderAcceptanceTests: XCTestCase {
+internal class MockURLResponderAcceptanceTests: XCTestCase {
 
     let body = "Hello World!"
 

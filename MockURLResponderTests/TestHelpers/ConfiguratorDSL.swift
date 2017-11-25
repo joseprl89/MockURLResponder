@@ -9,7 +9,7 @@
 import MockURLRecorder
 import MockURLResponderTestAPI
 
-func mockFor(_ url: URL, method: String, withResponse response: String) -> [String] {
+internal func mockFor(_ url: URL, method: String, withResponse response: String) -> [String] {
     let configurator = MockURLResponderConfigurator(scheme: url.scheme!, host: url.host!)
 
     configurator.respond(to: url.path, method: method)
@@ -19,6 +19,7 @@ func mockFor(_ url: URL, method: String, withResponse response: String) -> [Stri
     return configurator.arguments
 }
 
-func recordingSession() {
+internal func recordingSession() {
+    MockURLRecorder.clearSession()
     MockURLRecorder.register()
 }
