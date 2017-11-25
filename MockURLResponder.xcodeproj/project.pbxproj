@@ -23,7 +23,6 @@
 		728CEAD91FC77835003230CF /* ConfiguratorDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CEAD81FC77835003230CF /* ConfiguratorDSL.swift */; };
 		728CEADE1FC77BC5003230CF /* getCall.txt in Resources */ = {isa = PBXBuildFile; fileRef = 728CEADD1FC77BC5003230CF /* getCall.txt */; };
 		728CEAE01FC77C07003230CF /* FileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CEADF1FC77C07003230CF /* FileSystem.swift */; };
-		728CEAE21FC7810E003230CF /* getTwoCallsDifferentResponses.txt in Resources */ = {isa = PBXBuildFile; fileRef = 728CEAE11FC7810E003230CF /* getTwoCallsDifferentResponses.txt */; };
 		72E0F0F91FC97E7A007B9C0C /* getTwoCallsSameResponses.txt in Resources */ = {isa = PBXBuildFile; fileRef = 72E0F0F81FC97E7A007B9C0C /* getTwoCallsSameResponses.txt */; };
 		72E0F0FB1FC980D0007B9C0C /* RecordedInteractionsOnHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E0F0FA1FC980D0007B9C0C /* RecordedInteractionsOnHost.swift */; };
 		72E0F0FD1FC984B9007B9C0C /* RecordedInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E0F0FC1FC984B9007B9C0C /* RecordedInteraction.swift */; };
@@ -77,7 +76,6 @@
 		728CEAD81FC77835003230CF /* ConfiguratorDSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfiguratorDSL.swift; sourceTree = "<group>"; };
 		728CEADD1FC77BC5003230CF /* getCall.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = getCall.txt; sourceTree = "<group>"; };
 		728CEADF1FC77C07003230CF /* FileSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystem.swift; sourceTree = "<group>"; };
-		728CEAE11FC7810E003230CF /* getTwoCallsDifferentResponses.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = getTwoCallsDifferentResponses.txt; sourceTree = "<group>"; };
 		72E0F0F81FC97E7A007B9C0C /* getTwoCallsSameResponses.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = getTwoCallsSameResponses.txt; sourceTree = "<group>"; };
 		72E0F0FA1FC980D0007B9C0C /* RecordedInteractionsOnHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordedInteractionsOnHost.swift; sourceTree = "<group>"; };
 		72E0F0FC1FC984B9007B9C0C /* RecordedInteraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordedInteraction.swift; sourceTree = "<group>"; };
@@ -175,7 +173,6 @@
 			isa = PBXGroup;
 			children = (
 				728CEADD1FC77BC5003230CF /* getCall.txt */,
-				728CEAE11FC7810E003230CF /* getTwoCallsDifferentResponses.txt */,
 				72E0F0F81FC97E7A007B9C0C /* getTwoCallsSameResponses.txt */,
 				72E0F0FE1FC98BB3007B9C0C /* getThreeCallsRespondingABADoesNotMerge.txt */,
 			);
@@ -437,7 +434,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				72E0F0FF1FC98BB3007B9C0C /* getThreeCallsRespondingABADoesNotMerge.txt in Resources */,
-				728CEAE21FC7810E003230CF /* getTwoCallsDifferentResponses.txt in Resources */,
 				92285B1D1FC0B1B7001D5E1B /* test.json in Resources */,
 				728CEADE1FC77BC5003230CF /* getCall.txt in Resources */,
 				72E0F0F91FC97E7A007B9C0C /* getTwoCallsSameResponses.txt in Resources */,

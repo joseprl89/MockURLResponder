@@ -24,19 +24,6 @@ internal class MockURLRecorderAcceptanceTests: XCTestCase {
         XCTAssertEqual(MockURLRecorder.replayCode, contentsOf("getCall", ofType: "txt"))
     }
 
-    func testRecordsGetTwoCallsDifferentResponse() {
-        MockURLResponder.setUp(with:
-            mockFor(url, method: "GET", withResponse: "Hi 1") +
-            mockFor(url, method: "GET", withResponse: "Hi 2")
-        )
-        recordingSession()
-
-        _ = get(url.absoluteString)
-        _ = get(url.absoluteString)
-
-        XCTAssertEqual(MockURLRecorder.replayCode, contentsOf("getTwoCallsDifferentResponses", ofType: "txt"))
-    }
-
     func testRecordsGetTwoCallsSameResponseMerge() {
         MockURLResponder.setUp(with:
             mockFor(url, method: "GET", withResponse: "Hi") +
