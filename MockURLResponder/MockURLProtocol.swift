@@ -22,7 +22,7 @@ public class MockURLProtocol: URLProtocol {
 			return true
 		}
 	}
-    
+
     private class func isHTTP(_ request: URLRequest) -> Bool {
         return ["http", "https"].contains(request.url?.scheme ?? "")
     }
@@ -75,11 +75,11 @@ public class MockURLProtocol: URLProtocol {
 }
 
 private func matchingResponse(forRequest request: URLRequest) -> MockURLResponse? {
-	let host = MockURLResponder.Configuration.responseHosts.first(where: {
+	let hosts = MockURLResponder.Configuration.responseHosts.filter {
 		$0.host == request.url?.host && $0.scheme == request.url?.scheme
-	})
+	}
 
-	return host?.responses.first(where: {
+    return hosts.flatMap { $0.responses }.first(where: {
 		return $0.method == request.httpMethod && $0.path == request.url?.path && $0.repetitionsLeft > 0
 	})
 }

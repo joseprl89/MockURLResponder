@@ -10,6 +10,12 @@ import UIKit
 
 public class MockURLRecorder: NSObject {
 
+    private static var recordedCalls: [RecordedInteractionsOnHost] = []
+
+    public static var replayCode: String {
+        return recordedCalls.map { $0.replayCode }.joined(separator: "\n")
+    }
+
     /// Registers MockURLRecorderProtocol in the URLProtocol shared configuration.
     /// NOTE If you are using custom URLSessions, please register manually MockURLRecorderProtocol
     /// As one of your URLProtocols.
@@ -24,19 +30,21 @@ public class MockURLRecorder: NSObject {
         URLProtocol.registerClass(MockURLRecorderProtocol.self)
     }
 
-    class func record(_ response: HTTPURLResponse, for request: URLRequest, data bodyData: Data?) {
-        // Naively assume utf8
-        var body: String? = nil
-        if let data = bodyData {
-            body = String(data: data, encoding: .utf8)
-        }
-
-        replayCode += "let configurator = MockURLResponderConfigurator(scheme: \"\(request.url!.scheme!)\", " +
-            "host: \"\(request.url!.host!)\")\n\n" +
-            "configurator.respond(to: \"\(request.url!.path)\", method: \"\(request.httpMethod!)\")\n" +
-            "    .with(body: \"\(body ?? "")\")\n" +
-            "    .once()\n"
+    public class func clearSession() {
+        recordedCalls = []
     }
 
-    public private(set) static var replayCode: String = ""
+    class func record(_ response: HTTPURLResponse, for request: URLRequest, data: Data?) {
+        if let recordedCallHost = recordedCalls.first(where: { $0.sameHost(as: request) }) {
+            recordedCallHost.record(response, for: request, body: data)
+        } else {
+            guard let url = request.url else {
+                fatalError("Can't obtain url from request: \(request)")
+            }
+
+            let recordedCallHost = RecordedInteractionsOnHost(url: url)
+            recordedCallHost.record(response, for: request, body: data)
+            recordedCalls += [recordedCallHost]
+        }
+    }
 }
