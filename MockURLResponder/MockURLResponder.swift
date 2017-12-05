@@ -21,12 +21,15 @@ public class MockURLResponder {
 		static public var mockingBehaviour: MockingBehaviour = .preventNonMockedNetworkCalls
 	}
 
-    public static func setUp(with arguments: [String] = ProcessInfo.processInfo.arguments) {
+    public static func setUp(with arguments: [String] = ProcessInfo.processInfo.arguments,
+                             setupDefaultSessionConfiguration: Bool = true) {
         let tempResponseHosts = arguments.flatMap { MockURLHostResponse.from(argument: $0) }
 
         Configuration.responseHosts = tempResponseHosts
 
-        URLProtocol.registerClass(MockURLProtocol.self)
+        if setupDefaultSessionConfiguration {
+            URLProtocol.registerClass(MockURLProtocol.self)
+        }
     }
 
     public static func tearDown() {
