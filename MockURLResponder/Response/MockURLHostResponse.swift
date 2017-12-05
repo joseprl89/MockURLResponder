@@ -27,7 +27,7 @@ internal class MockURLHostResponse {
 	}
 
 	static func from(argument: String) -> MockURLHostResponse? {
-		guard argument.starts(with: "--mock-url-response=") else {
+		guard argument.hasPrefix("--mock-url-response=") else {
 			return nil
 		}
 
