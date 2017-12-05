@@ -1,7 +1,6 @@
 Pod::Spec.new do |s|
-
   s.name         = "MockURLResponderTestAPI"
-  s.version      = "0.2.2"
+  s.version      = "0.2.3"
   s.summary      = "Libary which make it possible to mock Respones from UITests target"
   s.homepage     = "https://github.com/TheAdamBorek/MockURLResponder"
   s.license      = "MIT"

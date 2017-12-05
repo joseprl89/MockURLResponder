@@ -22,8 +22,8 @@ application.launch()
 
 ## Installation with Cocoapods
 ```
-pod 'MockURLResponder', :git => 'https://github.com/TheAdamBorek/MockURLResponder', :tag => '0.2.2'
-pod 'MockURLResponderTestAPI' :git => 'https://github.com/TheAdamBorek/MockURLResponder', :tag => '0.2.2'
+pod 'MockURLResponder', :git => 'https://github.com/TheAdamBorek/MockURLResponder', :tag => '0.2.3'
+pod 'MockURLResponderTestAPI' :git => 'https://github.com/TheAdamBorek/MockURLResponder', :tag => '0.2.3'
 ```
 
 This will compile two schemes of the library:
