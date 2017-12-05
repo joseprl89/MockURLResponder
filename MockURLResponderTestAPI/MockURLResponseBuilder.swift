@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import MockURLResponder
 
 public class MockURLResponseBuilder {
 

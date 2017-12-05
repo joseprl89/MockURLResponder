@@ -5,7 +5,9 @@ Pod::Spec.new do |s|
   s.summary       = "An iOS network mocking DSL library with minimal setup required."
   s.homepage      = "https://github.com/TheAdamBorek/MockURLResponder"
   s.license       = "MIT"
-  s.author        = { "Josep" => "https://joseprl89.github.io" }
+  s.authors             = { "Josep Rodriguez" => "josep.rodriguez@tigerspike.com",
+                            "Adam Borek" => "adam.borek@tigerspike.com"
+                          }
   s.source        = { :git => "https://github.com/TheAdamBorek/MockURLResponder.git", :tag => "#{s.version}" }
   s.source_files  = "MockURLResponder/**/*.swift"
 end
