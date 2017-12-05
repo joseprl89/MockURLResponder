@@ -1,8 +1,6 @@
 # MockURLResponder
-
-[![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=5a11c0d7ec4ba100010e5a4f&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/5a11c0d7ec4ba100010e5a4f/build/latest?branch=master) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-
-An iOS network mocking DSL library with minimal setup required.
+An iOS network mocking DSL library with minimal setup required. Working also with
+Fork from: [https://github.com/joseprl89/MockURLResponder](https://github.com/joseprl89/MockURLResponder)
 
 # See it in action
 
@@ -14,7 +12,7 @@ let configurator = MockURLResponderConfigurator(scheme: "https", host: "api.myaw
 configurator.respond(to: "/path/to/resource", method: "GET")
 	.with(body: "{ \"json\": 123 }")
 	.always()
-	
+
 let application = XCUIApplication()
 application.launchArguments = ["-MyCustomArgument"] + configurator.arguments + configuratorTwo.arguments
 application.launch()
@@ -22,11 +20,11 @@ application.launch()
 
 # Getting started
 
-## Installation with Carthage
-
-The basic setup of Carthage can be found [here](https://github.com/Carthage/Carthage). For this specific project, add to your Cartfile the following line:
-
-```github "joseprl89/MockURLResponder"```
+## Installation with Cocoapods
+```
+pod 'MockURLResponder', :git => 'https://github.com/TheAdamBorek/MockURLResponder', :tag => '0.2.2'
+pod 'MockURLResponderTestAPI' :git => 'https://github.com/TheAdamBorek/MockURLResponder', :tag => '0.2.2'
+```
 
 This will compile two schemes of the library:
 
@@ -39,29 +37,6 @@ The second one, will provide a DSL to generate launch arguments the first one co
 Usually, this will mean that you embed `MockURLResponder` into your app's target, and `MockURLResponderTestAPI` onto your UI tests targets.
 
 Once you have the built frameworks, drag and drop them into the targets that are going to use them.
-
-### Image not found in app target
-
-If you encounter the image not found in the app target, go to `Project` > `App Target` > `General` tab and add the framework in the `Embedded binaries` box.
-
-This is related to [this issue](https://github.com/Carthage/Carthage/issues/635)
-
-### Image not found in test target
-
-Follow the instructions [here](http://www.mokacoding.com/blog/setting-up-testing-libraries-with-carthage-xcode7/). In the sample app, it meant adding to the `Build phases` a bash script running:
-
-```
-/usr/local/bin/carthage copy-frameworks
-```
-
-Using as input:
-
-`$(PROJECT_DIR)/Carthage/Build/iOS/MockURLResponderTestAPI.framework`
-`$(PROJECT_DIR)/Carthage/Build/iOS/MockURLResponder.framework`
-
-This is related to [this issue](https://github.com/Carthage/Carthage/issues/635)
-
-**Cocoapods is not supported. PRs welcome.**
 
 # Usage
 
