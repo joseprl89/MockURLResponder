@@ -13,6 +13,8 @@ public enum HTTPMethod: String {
 	case POST
 	case PUT
 	case HEAD
+	case DELETE
+	case CONNECT
 }
 
 internal class MockURLHostResponse {

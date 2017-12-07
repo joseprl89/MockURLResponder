@@ -6,7 +6,7 @@
 //  Copyright © 2017 com.github.joseprl89. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 public class MockURLRecorder: NSObject {
 
