@@ -1,5 +1,5 @@
 # MockURLResponder
-An iOS network mocking DSL library with minimal setup required. Working also with
+An iOS network mocking DSL library with minimal setup required. Working also with **UITests**.  
 Fork from: [https://github.com/joseprl89/MockURLResponder](https://github.com/joseprl89/MockURLResponder)
 
 # See it in action
@@ -22,8 +22,8 @@ application.launch()
 
 ## Installation with Cocoapods
 ```
-pod 'MockURLResponder', :git => 'https://github.com/TheAdamBorek/MockURLResponder', :tag => '0.2.3'
-pod 'MockURLResponderTestAPI' :git => 'https://github.com/TheAdamBorek/MockURLResponder', :tag => '0.2.3'
+pod 'MockURLResponder', :git => 'https://github.com/TheAdamBorek/MockURLResponder', :tag => '0.2.4'
+pod 'MockURLResponderTestAPI', :git => 'https://github.com/TheAdamBorek/MockURLResponder', :tag => '0.2.4'
 ```
 
 This will compile two schemes of the library:
