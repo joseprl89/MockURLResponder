@@ -19,7 +19,7 @@ internal class ViewController: UIViewController {
 
 		URLSession.shared.dataTask(with: URL(string: "https://www.google.com/")!) { data, _, _ in
 			DispatchQueue.main.async {
-				guard let data = data, let body = String(data: data, encoding: .ascii) else {
+				guard let data = data, let body = String(data: data, encoding: .utf8) else {
 					self.label.text = "Couldn't receive data"
 					return
 				}
