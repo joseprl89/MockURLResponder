@@ -1,12 +1,56 @@
-# Building a Response
-
 This section details all the customizations you can perform to a request. Notice that you can also see them in action in our [acceptance tests](MockURLResponderTests/MockURLResponderAcceptanceTests.swift)
 
-All code samples assume that you already have a `MockURLResponderConfigurator` setup, which can be created by using:
+# Filtering when to respond
+
+In this section we describe how you can customise when to use a given response.
+
+## By host
+
+In order to specify which host we are mocking, we hvae to create a MockURLResponderConfigurator specifying the scheme and host:
 
 `let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")`
 
+The configurator allows us to install stubs for certain network calls with great flexibility. An example of a setup is:
+
+```
+let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
+
+configurator.respond(to: "/path")
+    .with(body: body)
+    .once()
+
+MockURLResponder.setUp(with: configurator.arguments)
+```
+
 Notice that all responses must specify how many times it will be repeated. [More info here](#multiple-responses-same-request).
+
+## By query value
+
+Use the method `when(value: ..., forQueryField: ...)` in order to specify a response only when that value is present. More than one key value pairs can be specified if the method is called multiple times. For instance, when mocking a search for a topic named `topic`, the following response would be received:
+
+```
+configurator.respond(to: "/path")
+    .when(value: "topic", forQueryField: "q")
+    .with(body: "Found")
+    .once()
+```
+
+## By header fields
+
+Use the method `when(value: ..., forHeaderField: ...)` in order to specify a response only when that value is present. More than one key value pairs can be specified if the method is called multiple times.
+
+For instance, this response will only be returned if the user is logged in with a token with value `token`, which is passed in a header named `X-Authorization-Id`.
+
+```
+configurator.respond(to: "/path")
+    .when(value: "token", forHeaderField: "X-Authorization-Id")
+    .with(body: "With token")
+    .once()
+```
+
+# Building a Response
+
+In this section we describe how you can customise the response mocked.
 
 ## respond(to: ..., method: ...)
 
