@@ -22,7 +22,7 @@ application.launch()
 
 # Getting started
 
-## Components
+## Components
 
 There are two separate components to MockURLResponder.
 
