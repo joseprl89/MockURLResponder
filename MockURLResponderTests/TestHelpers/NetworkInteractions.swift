@@ -9,12 +9,12 @@
 import XCTest
 import MockURLResponder
 
-internal func get(_ url: String) -> String {
-    return submitRequest(method: .GET, url: url)
+internal func get(_ url: String, headerFields: [String: String] = [:]) -> String {
+    return submitRequest(method: .GET, url: url, headerFields: headerFields)
 }
 
-internal func post(_ url: String) -> String {
-    return submitRequest(method: .POST, url: url)
+internal func post(_ url: String, headerFields: [String: String] = [:]) -> String {
+    return submitRequest(method: .POST, url: url, headerFields: headerFields)
 }
 
 internal func getStatus(_ url: String) -> Int {
@@ -98,14 +98,14 @@ internal func getHeaders(_ url: String) -> [String: String] {
     return result
 }
 
-internal func submitRequest(method: HTTPMethod, url: String) -> String {
+internal func submitRequest(method: HTTPMethod, url: String, headerFields: [String: String]) -> String {
     guard let urlBuilt = URL(string: url) else {
         fatalError("Couldn't create a url request from \(url)")
     }
 
     var urlRequest = URLRequest(url: urlBuilt)
     urlRequest.httpMethod = method.rawValue
-
+    urlRequest.allHTTPHeaderFields = headerFields
     let semaphore = DispatchSemaphore(value: 0)
 
     var result: String!

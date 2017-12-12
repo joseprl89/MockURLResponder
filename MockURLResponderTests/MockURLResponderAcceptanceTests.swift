@@ -241,4 +241,38 @@ internal class MockURLResponderAcceptanceTests: XCTestCase {
         
         XCTAssertEqual(get("https://www.w3.org/path?q=queryable"), "Without query")
     }
+    
+    func testSupportsFilteringResponseByHeader() {
+        let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
+        
+        configurator.respond(to: "/path")
+            .when(value: "token", forHeaderField: "X-Authorization-Id")
+            .with(body: "With token")
+            .once()
+        
+        configurator.respond(to: "/path")
+            .with(body: "Without token")
+            .once()
+        
+        MockURLResponder.setUp(with: configurator.arguments)
+        
+        XCTAssertEqual(get("https://www.w3.org/path", headerFields: ["X-Authorization-Id": "token"]), "With token")
+    }
+    
+    func testSupportsFilteringResponseByHeaderWhenHeaderNotEqual() {
+        let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
+        
+        configurator.respond(to: "/path")
+            .when(value: "token", forHeaderField: "X-Authorization-Id")
+            .with(body: "With token")
+            .once()
+        
+        configurator.respond(to: "/path")
+            .with(body: "Without token")
+            .once()
+        
+        MockURLResponder.setUp(with: configurator.arguments)
+        
+        XCTAssertEqual(get("https://www.w3.org/path", headerFields: ["X-Authorization-Id": "something else"]), "Without token")
+    }
 }

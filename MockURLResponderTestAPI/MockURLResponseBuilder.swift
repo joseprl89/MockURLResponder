@@ -18,6 +18,7 @@ public class MockURLResponseBuilder {
 	private var body: String = ""
 	private var headerFields: [String: String] = [:]
     private var expectedQueryFields: [String: String] = [:]
+    private var expectedHeaderFields: [String: String] = [:]
 	private var delay: TimeInterval = 0
 	private var dropConnection = false
 
@@ -30,6 +31,11 @@ public class MockURLResponseBuilder {
     
     public func when(value: String, forQueryField key: String) -> MockURLResponseBuilder {
         expectedQueryFields[key] = value
+        return self
+    }
+    
+    public func when(value: String, forHeaderField key: String) -> MockURLResponseBuilder {
+        expectedHeaderFields[key] = value
         return self
     }
     
@@ -56,7 +62,7 @@ public class MockURLResponseBuilder {
             withExtension: type,
             subdirectory: directory,
             localization: localization
-            )!
+        )!
         
         return with(bodyFromURL: url)
     }
@@ -106,7 +112,8 @@ public class MockURLResponseBuilder {
 
 	private func buildResponse(repetitions: Int) -> MockURLResponse {
         return MockURLResponse(path: path, method: method, expectedQueryFields: expectedQueryFields,
-                               dropConnection: dropConnection, status: status, headerFields: headerFields,
-                               body: body, repetitionsLeft: repetitions, delay: delay)
+                               expectedHeaderFields: expectedHeaderFields, dropConnection: dropConnection,
+                               status: status, headerFields: headerFields, body: body,
+                               repetitionsLeft: repetitions, delay: delay)
 	}
 }

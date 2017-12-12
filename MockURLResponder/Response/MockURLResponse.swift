@@ -18,10 +18,11 @@ public class MockURLResponse {
 	let body: String
 	let delay: TimeInterval
     let expectedQueryFields: [String: String]
+    let expectedHeaderFields: [String: String]
 	private(set) var repetitionsLeft: Int
 
-    public init(path: String, method: String, expectedQueryFields: [String: String], dropConnection: Bool, status: Int,
-                headerFields: [String: String], body: String, repetitionsLeft: Int, delay: TimeInterval) {
+    public init(path: String, method: String, expectedQueryFields: [String: String], expectedHeaderFields: [String: String],
+                dropConnection: Bool, status: Int, headerFields: [String: String], body: String, repetitionsLeft: Int, delay: TimeInterval) {
 		self.path = path
 		self.dropConnection = dropConnection
 		self.method = method
@@ -31,6 +32,7 @@ public class MockURLResponse {
 		self.repetitionsLeft = repetitionsLeft
 		self.delay = delay
         self.expectedQueryFields = expectedQueryFields
+        self.expectedHeaderFields = expectedHeaderFields
 	}
 
 	public var jsonArguments: [String: Any] {
@@ -43,7 +45,8 @@ public class MockURLResponse {
 			"body": body,
 			"repetitions": repetitionsLeft,
 			"delay": delay,
-            "expectedQueryFields": expectedQueryFields
+            "expectedQueryFields": expectedQueryFields,
+            "expectedHeaderFields": expectedHeaderFields
 		]
 	}
 
@@ -55,7 +58,8 @@ public class MockURLResponse {
 			let repetitionsLeft = argument["repetitions"] as? Int,
 			let delay = argument["delay"] as? TimeInterval,
 			let body = argument["body"] as? String,
-            let expectedQueryFields = argument["expectedQueryFields"] as? [String: String]else {
+            let expectedQueryFields = argument["expectedQueryFields"] as? [String: String],
+            let expectedHeaderFields = argument["expectedHeaderFields"] as? [String: String] else {
 				fatalError("Unexpected nil values in MockURLResponse. Argument: \(argument)")
 		}
 
@@ -65,6 +69,7 @@ public class MockURLResponse {
 			path: path,
 			method: method,
             expectedQueryFields: expectedQueryFields,
+            expectedHeaderFields: expectedHeaderFields,
 			dropConnection: dropConnection,
 			status: status,
 			headerFields: headerFields,
