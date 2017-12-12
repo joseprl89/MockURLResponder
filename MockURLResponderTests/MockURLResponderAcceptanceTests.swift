@@ -279,7 +279,7 @@ internal class MockURLResponderAcceptanceTests: XCTestCase {
     func testSupportsEncodingSpecialCharacters() {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
-        configurator.respond(to: "/path", method: "GET")
+        configurator.respond(to: "/path")
             .with(body: "{ \"test\": \"passed ąęłóńźż\" }")
             .once()
 
