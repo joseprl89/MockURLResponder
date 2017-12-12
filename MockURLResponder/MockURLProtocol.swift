@@ -80,6 +80,21 @@ private func matchingResponse(forRequest request: URLRequest) -> MockURLResponse
 	}
 
     return hosts.flatMap { $0.responses }.first(where: {
-		return $0.method == request.httpMethod && $0.path == request.url?.path && $0.repetitionsLeft > 0
+        return $0.method == request.httpMethod && $0.path == request.url?.path && queries(of: request, match: $0.expectedQueryFields) && $0.repetitionsLeft > 0
 	})
+}
+
+private func queries(of request: URLRequest, match expectedQueryFields: [String: String]) -> Bool {
+    guard let url = request.url,
+        let components = NSURLComponents(url: url, resolvingAgainstBaseURL: false),
+        let queryItems = components.queryItems else {
+        return expectedQueryFields.isEmpty
+    }
+    
+    
+    let foundKeys = expectedQueryFields.keys.filter { (queryKey) -> Bool in
+        return queryItems.contains(where: { $0.name == queryKey && $0.value == expectedQueryFields[queryKey] })
+    }
+    
+    return foundKeys.count == expectedQueryFields.count
 }

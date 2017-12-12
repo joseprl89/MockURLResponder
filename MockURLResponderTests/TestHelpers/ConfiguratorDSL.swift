@@ -12,7 +12,8 @@ import MockURLResponderTestAPI
 internal func mockFor(_ url: URL, method: String, withResponse response: String) -> [String] {
     let configurator = MockURLResponderConfigurator(scheme: url.scheme!, host: url.host!)
 
-    configurator.respond(to: url.path, method: method)
+    configurator.respond(to: url.path)
+        .when(method: method)
         .with(body: response)
         .once()
 

@@ -17,9 +17,10 @@ public class MockURLResponse {
 	let headerFields: [String: String]
 	let body: String
 	let delay: TimeInterval
+    let expectedQueryFields: [String: String]
 	private(set) var repetitionsLeft: Int
 
-    public init(path: String, method: String, dropConnection: Bool, status: Int,
+    public init(path: String, method: String, expectedQueryFields: [String: String], dropConnection: Bool, status: Int,
                 headerFields: [String: String], body: String, repetitionsLeft: Int, delay: TimeInterval) {
 		self.path = path
 		self.dropConnection = dropConnection
@@ -29,6 +30,7 @@ public class MockURLResponse {
 		self.body = body
 		self.repetitionsLeft = repetitionsLeft
 		self.delay = delay
+        self.expectedQueryFields = expectedQueryFields
 	}
 
 	public var jsonArguments: [String: Any] {
@@ -40,7 +42,8 @@ public class MockURLResponse {
 			"headerFields": headerFields,
 			"body": body,
 			"repetitions": repetitionsLeft,
-			"delay": delay
+			"delay": delay,
+            "expectedQueryFields": expectedQueryFields
 		]
 	}
 
@@ -51,7 +54,8 @@ public class MockURLResponse {
 			let headerFields = argument["headerFields"] as? [String: String],
 			let repetitionsLeft = argument["repetitions"] as? Int,
 			let delay = argument["delay"] as? TimeInterval,
-			let body = argument["body"] as? String else {
+			let body = argument["body"] as? String,
+            let expectedQueryFields = argument["expectedQueryFields"] as? [String: String]else {
 				fatalError("Unexpected nil values in MockURLResponse. Argument: \(argument)")
 		}
 
@@ -60,6 +64,7 @@ public class MockURLResponse {
 		return MockURLResponse(
 			path: path,
 			method: method,
+            expectedQueryFields: expectedQueryFields,
 			dropConnection: dropConnection,
 			status: status,
 			headerFields: headerFields,

@@ -39,7 +39,7 @@ public class MockURLResponderConfigurator {
         self.host = host
     }
 
-    public func respond(to path: String, method: String = HTTPMethod.GET.rawValue) -> MockURLResponseBuilder {
-        return MockURLResponseBuilder(configurator: self, path: path, method: method)
+    public func respond(to path: String) -> MockURLResponseBuilder {
+        return MockURLResponseBuilder(configurator: self, path: path)
     }
 }
