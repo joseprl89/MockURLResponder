@@ -13,6 +13,8 @@ public enum HTTPMethod: String {
 	case POST
 	case PUT
 	case HEAD
+	case DELETE
+	case CONNECT
 }
 
 internal class MockURLHostResponse {
@@ -27,12 +29,12 @@ internal class MockURLHostResponse {
 	}
 
 	static func from(argument: String) -> MockURLHostResponse? {
-		guard argument.starts(with: "--mock-url-response=") else {
+		guard argument.hasPrefix("--mock-url-response=") else {
 			return nil
 		}
 
 		let argumentString = argument.replacingOccurrences(of: "--mock-url-response=", with: "")
-		let argumentData = argumentString.data(using: .ascii)!
+		let argumentData = argumentString.data(using: .utf8)!
 		guard let jsonArgument = try? JSONSerialization.jsonObject(with: argumentData),
 			let jsonDictionary = jsonArgument as? [String: Any] else {
 			fatalError("Couldn't convert argument data to json object. Data received: \(argumentString)")

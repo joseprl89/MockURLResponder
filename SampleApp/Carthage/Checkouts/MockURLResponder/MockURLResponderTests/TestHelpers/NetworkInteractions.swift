@@ -112,7 +112,7 @@ func submitRequest(method: HTTPMethod, url: String) -> String {
     URLSession.shared.dataTask(with: urlRequest) { data, _, error in
         XCTAssertNil(error)
         XCTAssertNotNil(data)
-        result = String(data: data!, encoding: .ascii)
+        result = String(data: data!, encoding: .utf8)
 
         semaphore.signal()
     }.resume()

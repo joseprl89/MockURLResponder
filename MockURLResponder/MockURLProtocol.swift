@@ -55,7 +55,7 @@ public class MockURLProtocol: URLProtocol {
 				return
 			}
 
-			let bodyData = mockResponse.body.data(using: .ascii)!
+			let bodyData = mockResponse.body.data(using: .utf8)!
 			let response = HTTPURLResponse(url: request.url!, statusCode: mockResponse.status,
 										   httpVersion: nil, headerFields: mockResponse.headerFields)
 			client?.urlProtocol(self, didLoad: bodyData)

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import MockURLResponder
 
 public class MockURLResponderConfigurator {
 
@@ -20,7 +19,7 @@ public class MockURLResponderConfigurator {
 			fatalError("Couldn't serialise arguments: \(jsonArguments)")
 		}
 
-        let stringJSONArgument = String(data: dataJSONArgument, encoding: .ascii)!
+        let stringJSONArgument = String(data: dataJSONArgument, encoding: .utf8)!
         return [
             "--mock-url-response=\(stringJSONArgument)"
         ]

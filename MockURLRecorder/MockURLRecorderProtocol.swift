@@ -5,8 +5,7 @@
 //  Created by Josep Rodríguez López on 23/11/2017.
 //  Copyright © 2017 com.github.joseprl89. All rights reserved.
 //
-
-import UIKit
+import Foundation
 
 private let recordingKey = "requestBeingRecorded"
 

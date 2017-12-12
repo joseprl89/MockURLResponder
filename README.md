@@ -14,7 +14,7 @@ let configurator = MockURLResponderConfigurator(scheme: "https", host: "api.myaw
 configurator.respond(to: "/path/to/resource", method: "GET")
 	.with(body: "{ \"json\": 123 }")
 	.always()
-	
+
 let application = XCUIApplication()
 application.launchArguments = ["-MyCustomArgument"] + configurator.arguments + configuratorTwo.arguments
 application.launch()
@@ -22,21 +22,44 @@ application.launch()
 
 # Getting started
 
-## Installation with Carthage
+## Components
 
-The basic setup of Carthage can be found [here](https://github.com/Carthage/Carthage). For this specific project, add to your Cartfile the following line:
-
-```github "joseprl89/MockURLResponder"```
-
-This will compile two schemes of the library:
+There are two separate components to MockURLResponder.
 
 1. MockURLResponder
 2. MockURLResponderTestAPI
 
-The first one provides the mocking capabilities on the target that requires its network calls mocked.
+The first one provides the mocking capabilities on the target that requires to mock network calls.
 The second one, will provide a DSL to generate launch arguments the first one consumes in order to configure the responses. Notice that this framework depends on the first one, so both frameworks will have to be embedded into the test targets.
 
 Usually, this will mean that you embed `MockURLResponder` into your app's target, and `MockURLResponderTestAPI` onto your UI tests targets.
+
+## Installation with Cocoapods
+
+Embed into your apps target the MockURLResponder pod dependency:
+
+```
+pod 'MockURLResponder', :git => 'https://github.com/joseprl89/MockURLResponder'
+```
+
+And into your test target the MockURLResponderTestAPI pod:
+
+```
+pod 'MockURLResponderTestAPI', :git => 'https://github.com/joseprl89/MockURLResponder'
+```
+
+## Installation with Carthage
+
+The basic setup of Carthage can be found [here](https://github.com/Carthage/Carthage). For this specific project, add to your Cartfile the following line:
+
+```
+github "joseprl89/MockURLResponder"
+```
+
+This will compile the components described above:
+
+1. MockURLResponder
+2. MockURLResponderTestAPI
 
 Once you have the built frameworks, drag and drop them into the targets that are going to use them.
 
