@@ -14,7 +14,7 @@ internal class MockURLResponderSampleAppUITests: XCTestCase {
     func test_mocksNetwork() {
 		let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.google.com")
 
-		configurator.respond(to: "/", method: "GET")
+		configurator.respond(to: "/")
 			.with(body: "Mock URL Responder is great!")
 			.always()
 
