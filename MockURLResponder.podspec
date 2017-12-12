@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name          = "MockURLResponder"
-  s.version       = "0.2.2"
+  s.version       = "0.3.0"
   s.platform      = :ios, '9.0'
   s.summary       = "An iOS network mocking DSL library with minimal setup required."
   s.homepage      = "https://github.com/joseprl89/MockURLResponder"
