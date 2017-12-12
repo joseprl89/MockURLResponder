@@ -188,3 +188,8 @@ E.g. `0.1.0` is compatible with `0.1.1`, but `0.1.0` may break when upgrading to
 We started the development of this framework with the goal to provide a dependency with the smallest footprint possible (in terms of size and maintainability), while allowing to easily decouple your project from it.
 
 This would allow consumers to build on top of this framework their own testing solution rather than tightly coupling themselves to a 3rd party solution.
+
+# Special thanks
+
+* [Hannah Paulson](https://uk.linkedin.com/in/hannah-paulson-94b01051) for bringing the idea and helping me kickstart it.
+* [Adam Borek](https://github.com/TheAdamBorek/) for adding CocoaPods support and kickstarting its use in production.
