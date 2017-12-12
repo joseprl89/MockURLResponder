@@ -81,8 +81,9 @@ private func matchingResponse(forRequest request: URLRequest) -> MockURLResponse
 
     return hosts.flatMap { $0.responses }.first(where: {
         return $0.method == request.httpMethod && $0.path == request.url?.path
-            && queries(of: request, match: $0.expectedQueryFields) && headers(of: request, match: $0.expectedHeaderFields) &&
-            $0.repetitionsLeft > 0
+            && queries(of: request, match: $0.expectedQueryFields)
+            && headers(of: request, match: $0.expectedHeaderFields)
+            && $0.repetitionsLeft > 0
 	})
 }
 
@@ -92,18 +93,19 @@ private func queries(of request: URLRequest, match expectedQueryFields: [String:
         let queryItems = components.queryItems else {
         return expectedQueryFields.isEmpty
     }
-    
-    
+
     let matchedKeys = expectedQueryFields.keys.filter { (queryKey) -> Bool in
         return queryItems.contains(where: { $0.name == queryKey && $0.value == expectedQueryFields[queryKey] })
     }
-    
+
     return matchedKeys.count == expectedQueryFields.count
 }
 
 private func headers(of request: URLRequest, match expectedHeaderFields: [String: String]) -> Bool {
     let matchedKeys = expectedHeaderFields.keys.filter { (header) -> Bool in
-        return request.allHTTPHeaderFields?.contains(where: { $0.key == header && $0.value == expectedHeaderFields[header] }) ?? false
+        return request.allHTTPHeaderFields?.contains(where: {
+            $0.key == header && $0.value == expectedHeaderFields[header]
+        }) ?? false
     }
 
     return matchedKeys.count == expectedHeaderFields.count
