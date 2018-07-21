@@ -21,9 +21,16 @@ public class MockURLResponse {
     let expectedHeaderFields: [String: String]
 	private(set) var repetitionsLeft: Int
 
-    public init(path: String, method: String, expectedQueryFields: [String: String],
-                expectedHeaderFields: [String: String], dropConnection: Bool, status: Int,
-                headerFields: [String: String], body: String, repetitionsLeft: Int, delay: TimeInterval) {
+    public init(path: String,
+                method: String,
+                expectedQueryFields: [String: String],
+                expectedHeaderFields: [String: String],
+                dropConnection: Bool,
+                status: Int,
+                headerFields: [String: String],
+                body: String,
+                repetitionsLeft: Int,
+                delay: TimeInterval) {
 		self.path = path
 		self.dropConnection = dropConnection
 		self.method = method
