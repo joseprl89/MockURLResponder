@@ -203,7 +203,7 @@ internal class MockURLResponderAcceptanceTests: XCTestCase {
             .with(resource: "test", ofType: "json", bundle: Bundle(for: MockURLResponderAcceptanceTests.self))
             .once()
 
-        MockURLResponder.setUp(with: configurator.arguments + ["-FIRDebugEnabled"])
+        MockURLResponder.setUp(with: configurator.arguments)
 
         XCTAssertEqual(get("https://www.w3.org/path"), "{ \"test\": \"passed\" }\n")
     }
@@ -284,7 +284,7 @@ internal class MockURLResponderAcceptanceTests: XCTestCase {
             .with(body: "{ \"test\": \"passed ąęłóńźż\" }")
             .once()
 
-        MockURLResponder.setUp(with: configurator.arguments + ["-FIRDebugEnabled"])
+        MockURLResponder.setUp(with: configurator.arguments)
 
         XCTAssertEqual(get("https://www.w3.org/path"), "{ \"test\": \"passed ąęłóńźż\" }")
     }
