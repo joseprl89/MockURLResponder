@@ -110,9 +110,14 @@ public class MockURLResponseBuilder {
 	}
 
 	private func buildResponse(repetitions: Int) -> MockURLResponse {
-        return MockURLResponse(path: path, method: method, expectedQueryFields: expectedQueryFields,
-                               expectedHeaderFields: expectedHeaderFields, dropConnection: dropConnection,
-                               status: status, headerFields: headerFields, body: body,
-                               repetitionsLeft: repetitions, delay: delay)
+        return MockURLResponse(
+            path: path,
+            method: method,
+            expectedQueryFields: expectedQueryFields,
+            expectedHeaderFields: expectedHeaderFields,
+            dropConnection: dropConnection, status: status,
+            headerFields: headerFields, body: body,
+            repetitionsLeft: repetitions, delay: delay
+        )
 	}
 }

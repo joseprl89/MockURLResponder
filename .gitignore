@@ -73,6 +73,8 @@ fabric.properties
 # Carthage/Checkouts
 
 Carthage/Build
+SampleApp/Carthage/Build
+SampleApp/Carthage/Checkouts
 
 ### Swift ###
 # Xcode

@@ -1,16 +1,16 @@
-This section details all the customizations you can perform to a request. Notice that you can also see them in action in our [acceptance tests](MockURLResponderTests/MockURLResponderAcceptanceTests.swift)
+This section details all the customizations you can perform to a request. Notice that you can also see them in action in our [acceptance tests](../MockURLResponderTests/MockURLResponderAcceptanceTests.swift)
 
-# Filtering when to respond
+# Configuring the request to mock
 
-In this section we describe how you can customise when to use a given response.
+In this section we describe how you can identify the request that needs to be mocked, specifying which values we can use to configure the mock.
 
 ## By host
 
-In order to specify which host we are mocking, we hvae to create a MockURLResponderConfigurator specifying the scheme and host:
+The first step to configure a mocked response is to specify the host and scheme used by your API. In order to specify to do so, we create a MockURLResponderConfigurator:
 
 `let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")`
 
-The configurator allows us to install stubs for certain network calls with great flexibility. An example of a setup is:
+The configurator is our interface to further customise how the mock server should behave for this specific host. A simple example setup is:
 
 ```
 let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
@@ -22,11 +22,19 @@ configurator.respond(to: "/path")
 MockURLResponder.setUp(with: configurator.arguments)
 ```
 
-Notice that all responses must specify how many times it will be repeated. [More info here](#multiple-responses-same-request).
+Notice that all responses must specify how many times it will be repeated. [More info here](#repeating-responses).
+
+## By HTTP Method and path to the resource
+
+The first method we can call on the configurator is `respond(to: ..., method: ...)`. This method will generate a mock response builder to further customise the response we want to do with a set of filters and mocked response values.
+
+```
+configurator.respond(to: "/path", method: "GET")
+```
 
 ## By query value
 
-Use the method `when(value: ..., forQueryField: ...)` in order to specify a response only when that value is present. More than one key value pairs can be specified if the method is called multiple times. For instance, when mocking a search for a topic named `topic`, the following response would be received:
+Use the method `when(value: ..., forQueryField: ...)` in order to specify a response only when that value is present in the HTTP Query. More than one key value pairs can be specified if the method is called multiple times. For instance, the following configuration will respond only if we are to mock a search on the query field `q` for a topic named `topic`:
 
 ```
 configurator.respond(to: "/path")
@@ -37,9 +45,9 @@ configurator.respond(to: "/path")
 
 ## By header fields
 
-Use the method `when(value: ..., forHeaderField: ...)` in order to specify a response only when that value is present. More than one key value pairs can be specified if the method is called multiple times.
+Use the method `when(value: ..., forHeaderField: ...)` in order to specify a response only when the HTTP header has the value desired. This method can be called multiple times, as many as headers you want to use to identify the request you need to mock.
 
-For instance, this response will only be returned if the user is logged in with a token with value `token`, which is passed in a header named `X-Authorization-Id`.
+As an example, this response will only be returned if the user is logged in with a token with value `token`, which is passed in a header named `X-Authorization-Id`.
 
 ```
 configurator.respond(to: "/path")
@@ -50,19 +58,11 @@ configurator.respond(to: "/path")
 
 # Building a Response
 
-In this section we describe how you can customise the response mocked.
+In this section we describe how you can customise the mocked response with different values.
 
-## respond(to: ..., method: ...)
+## Custom HTTP body
 
-Generates a response builder to further customise.
-
-```
-configurator.respond(to: "/path", method: "GET")
-```
-
-## with(body: ...)
-
-This method allows to set the body that will be injected into the request. Can be used by doing:
+The simplest method to provide a mocked body is to simply pass it as a `String`. This is done with the `with(body: ...)` method like so:
 
 ```
 configurator.respond(to: "/path", method: "GET")
@@ -70,9 +70,13 @@ configurator.respond(to: "/path", method: "GET")
     .once()
 ```
 
-## with(bodyFromURL: ...)
+If you are interested to use the mock server as a proxy, or want to have some calls passing through, it also allows to request the body contents from a URL. This can be used in a few different ways:
 
-Allows to pass in a url to set the body contents. Could use a host that has not been mocked, or a data:// schema, or a local file.
+* Can use to proxy to a host that has not been mocked
+* Can use the `data://` schema
+* Can use the URL of a local file.
+
+An example of this setup:
 
 ```
 configurator.respond(to: "/path", method: "GET")
@@ -80,9 +84,7 @@ configurator.respond(to: "/path", method: "GET")
     .once()
 ```
 
-## with(resource: ..., ofType: ..., directory: ..., localization: ..., bundle: ...)
-
-Allows to load a resource from the bundle and pass it as a body in the response.
+Finally, we also provide a method to pass the contents of a resource in your bundle using the method `with(resource: ..., ofType: ..., directory: ..., localization: ..., bundle: ...)`:
 
 ```
 configurator.respond(to: "/path", method: "GET")
@@ -90,9 +92,9 @@ configurator.respond(to: "/path", method: "GET")
     .once()
 ```
 
-## with(status: ...)
+## Custom HTTP Status code
 
-Allows to specify the HTTP status code to pass in the response.
+The mock server allows to configure the HTTP Status code in the response with the following method:
 
 ```
 configurator.respond(to: "/path", method: "GET")
@@ -100,9 +102,9 @@ configurator.respond(to: "/path", method: "GET")
     .once()
 ```
 
-## with(value: ..., forHeaderField: ...) 
+## Custom HTTP headers
 
-Sets a header in the mocked response.
+Allows to set a header in the mocked response. Can be called multiple times if multiple header fields are required.
 
 ```
 configurator.respond(to: "/path", method: "GET")
@@ -110,9 +112,11 @@ configurator.respond(to: "/path", method: "GET")
     .once()
 ```
 
-## withDroppedRequest()
+## Reproducing edge cases
 
-Drops the request. Useful when testing recoverability. In the following example, the call will be dropped once, but the second retry will succeed.
+### Mock network failures
+
+Drops the request. Useful when testing how your app recovers from failed network conditions. In the following example, the call will be dropped once, and succeed in the second attempt.
 
 ```
 configurator.respond(to: "/path", method: "GET")
@@ -124,23 +128,9 @@ configurator.respond(to: "/path", method: "GET")
     .once()
 ```
 
-## with(delay: ...)
+### Adding a delay
 
-Delays the response for as many seconds as specified in the parameter, passed as a TimeInterval (double). Useful when testing that a loading spinner appears.
-
-```
-configurator.respond(to: "/path", method: "GET")
-    .with(body: "Hi!")
-    .once()
-```
-
-# Multiple Responses Same Request
-
-It is mandatory to specify how many times a response should be executed. We provide three methods to do so:
-
-## once()
-
-Uses the response once.
+Delays the response for as many seconds as specified in the parameter, passed as a `TimeInterval` (aka double). Useful when testing how the app behaves under slow network conditions.
 
 ```
 configurator.respond(to: "/path", method: "GET")
@@ -149,9 +139,27 @@ configurator.respond(to: "/path", method: "GET")
     .once()
 ```
 
+# Repeating responses
+
+It is mandatory to specify how many times a response should be executed, or otherwise the response configured won't be mocked in the system. Xcode will raise a warning for unused result if you forget to add one of these methods in the configuration.
+
+If the app performs more network calls than expected to a resource, e.g. if you specify once, but the call occurs twice, the following calls will behave as a non mocked network call.
+
+We provide three methods to do so:
+
+## once()
+
+Uses the mocked response just once.
+
+```
+configurator.respond(to: "/path", method: "GET")
+    .with(body: "Hi!")
+    .once()
+```
+
 ## always()
 
-Always uses the response. Technically, it stops at Int.max repetitions.
+Always uses the same response, although technically, it stops at Int.max repetitions.
 
 ```
 configurator.respond(to: "/path", method: "GET")
@@ -167,4 +175,18 @@ Repeats the call as many times as specified in the parameter.
 configurator.respond(to: "/path", method: "GET")
     .with(body: "Hi!")
     .times(5)
+```
+
+# Request matching priority
+
+The requests will be matched in the same order they are configured. This means that the second response will never be provided if you configure your mock like this:
+
+```
+configurator.respond(to: "/path", method: "GET")
+    .with(body: "First response")
+    .always()
+
+configurator.respond(to: "/path", method: "GET")
+    .with(body: "Second response")
+    .once()
 ```

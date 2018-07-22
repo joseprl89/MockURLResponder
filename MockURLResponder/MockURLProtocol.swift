@@ -76,15 +76,28 @@ public class MockURLProtocol: URLProtocol {
 
 private func matchingResponse(forRequest request: URLRequest) -> MockURLResponse? {
 	let hosts = MockURLResponder.Configuration.responseHosts.filter {
-		$0.host == request.url?.host && $0.scheme == request.url?.scheme
+		$0.matches(request)
 	}
 
     return hosts.flatMap { $0.responses }.first(where: {
-        return $0.method == request.httpMethod && $0.path == request.url?.path
-            && queries(of: request, match: $0.expectedQueryFields)
-            && headers(of: request, match: $0.expectedHeaderFields)
-            && $0.repetitionsLeft > 0
+        return $0.matches(request)
 	})
+}
+
+extension MockURLHostResponse {
+    func matches(_ request: URLRequest) -> Bool {
+        return host == request.url?.host && scheme == request.url?.scheme
+    }
+}
+
+extension MockURLResponse {
+    func matches(_ request: URLRequest) -> Bool {
+        return method == request.httpMethod
+            && path == request.url?.path
+            && queries(of: request, match: expectedQueryFields)
+            && headers(of: request, match: expectedHeaderFields)
+            && repetitionsLeft > 0
+    }
 }
 
 private func queries(of request: URLRequest, match expectedQueryFields: [String: String]) -> Bool {
