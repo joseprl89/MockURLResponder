@@ -84,8 +84,6 @@ Using as input:
 
 This is related to [this issue](https://github.com/Carthage/Carthage/issues/635)
 
-**Cocoapods is not supported. PRs welcome.**
-
 # Usage
 
 The framework is split into two separate components to ensure that we can decouple our subject under test (SUT) from our test code which injects the expected responses.
@@ -94,11 +92,11 @@ The framework is split into two separate components to ensure that we can decoup
 
 The subject under test has a very slim integration with MockURLResponder, which is basically reduced to execute:
 
-```MockURLResponder.setUp()```
+`MockURLResponder.setUp()`
 
-This will will read the ProcessInfo launchArguments to configure the mocked responses, and then register a `URLProtocol` in the shared URLSession that will intercept network calls and respond as configured.
+This will will read the ProcessInfo launchArguments to configure the mocked responses, and then register a `URLProtocol` in the shared `URLSession` that will intercept network calls and respond as configured.
 
-It allows to customise the behaviour of the system when finding a call that has not been mocked by setting `MockURLResponder.Configuration.mockingBehaviour`. The values it can take are:
+You can customise the behaviour of the system when finding a call that has not been mocked by setting `MockURLResponder.Configuration.mockingBehaviour`. The values it can take are:
 
 1. preventNonMockedNetworkCalls: The default value. Upon finding a network call that hasn't been mocked, `fatalError()s` your application. Consider it a strict mock instead of a partial mock.
 2. dropNonMockedNetworkCalls: Drops the network call and returns an error.
@@ -118,7 +116,7 @@ URLSession(configuration: customConfiguration)
 
 ## Usage from UI Tests
 
-As mentioned earlier, the test code will inject into the SUT the mocked responses via its launch arguments. This will integrate painlessly with Xcode UITests.
+As mentioned earlier, the test code will inject into the SUT the mocked responses via its launch arguments. This allows to communicate the setup of our mocks painlessly from the XCUITests.
 
 Namely, the integration starts by creating an instance (or more) of `MockURLResponderConfigurator`:
 
@@ -132,7 +130,7 @@ configurator.respond(to: "/", method: "GET")
 	.always()
 ```
 
-The builder allows to customise in detail the behaviour of the response. This is explained in detail in the [Building a response](/docs/BuildingAResponse.md)
+The builder allows to customise in detail the behaviour of the response. This is explained in detail in the [Building a response](/docs/BuildingAResponse.md).
 
 Notice that as a last step of the response customisation there must always be a call to how many times the call must be mocked. This can be either of:
 
@@ -142,7 +140,7 @@ Notice that as a last step of the response customisation there must always be a 
 
 This will allow you to customise a sequence of multiple responses for the same resource.
 
-Finally, you have to pass this configuration into the SUT. This is done by injecting the arguments it generates via the `XCUIApplication` launchArguments. As an advanced example, the following code would register multiple configurators that have been setup separetely, plus custom arguments your app may be using:
+Finally, you have to pass this configuration into the SUT. This is done by injecting the arguments it generates via the `XCUIApplication` launchArguments. As an advanced example, the following code would register multiple configurators that have been setup separately, plus custom arguments your app may be using:
 
 ```
 let application = XCUIApplication()
@@ -171,7 +169,6 @@ func test_mocksSingleCall() {
     XCTAssertEqual(get("https://www.w3.org/path?q=query#fragment"), body)
 }
 ```
-
 
 # Running the tests
 
