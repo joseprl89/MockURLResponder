@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "MockURLResponderTestAPI"
-  s.version      = "0.3.0"
+  s.version      = "0.3.1"
   s.summary      = "API to control the MockURLResponder setup."
   s.homepage     = "https://github.com/joseprl89/MockURLResponder"
   s.license      = "MIT"
