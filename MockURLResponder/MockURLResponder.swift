@@ -23,7 +23,7 @@ public class MockURLResponder {
 
     public static func setUp(with arguments: [String] = ProcessInfo.processInfo.arguments,
                              setupDefaultSessionConfiguration: Bool = true) {
-        let tempResponseHosts = arguments.flatMap { MockURLHostResponse.from(argument: $0) }
+        let tempResponseHosts = arguments.compactMap { MockURLHostResponse.from(argument: $0) }
 
         Configuration.responseHosts = tempResponseHosts
 
