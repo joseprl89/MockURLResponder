@@ -34,12 +34,12 @@ internal class MockURLResponderAcceptanceTests: XCTestCase {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         configurator.respond(to: "/path")
-            .when(method: "GET")
+            .when(method: .GET)
             .with(body: body)
             .once()
 
         configurator.respond(to: "/path")
-            .when(method: "POST")
+            .when(method: .POST)
             .with(body: "Received from POST")
             .once()
 
