@@ -24,7 +24,7 @@ module Fastlane
         [
           FastlaneCore::ConfigItem.new(key: :version_number,
                                        env_name: "FL_VERSION_NUMBER_VERSION_NUMBER",
-                                       description: "Creates release branch to a specific version.",
+                                       description: "Creates release branch to a specific version",
                                        optional: false),
         ]
       end

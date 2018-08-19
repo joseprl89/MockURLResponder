@@ -1,7 +1,10 @@
 platform :ios do
   private_lane :get_version_to_release do
-    current_version = get_version_number(xcodeproj: "MockURLResponder.xcodeproj")
-    UI.input("Please specify the new version (current = #{current_version}):")
+    current_version = get_version_number(
+      xcodeproj: "MockURLResponder.xcodeproj",
+      target: "MockURLResponder"
+    )
+    return UI.input("Please specify the new version (current = #{current_version}):")
   end
 
   private_lane :bump_version do |opts|
