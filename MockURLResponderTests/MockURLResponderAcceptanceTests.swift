@@ -277,6 +277,19 @@ internal class MockURLResponderAcceptanceTests: XCTestCase {
         XCTAssertEqual(body, "Without token")
     }
 
+    func testSupportsHeaderValuesInResponse() {
+        let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
+
+        configurator.respond(to: "/path")
+            .with(value: "Value", forHeaderField: "Key")
+            .once()
+
+        MockURLResponder.setUp(with: configurator.arguments)
+
+        let headers = getHeaders("https://www.w3.org/path")
+        XCTAssertEqual(headers, ["Key": "Value"])
+    }
+
     func testSupportsEncodingSpecialCharacters() {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
