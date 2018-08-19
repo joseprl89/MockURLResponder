@@ -16,6 +16,7 @@ module Fastlane
 
         sh "git branch -d #{branch}"
         sh "git push --all"
+        sh "git push -v origin refs/tags/#{params[:version_number]}"
       end
 
       #####################################################

@@ -21,8 +21,8 @@ platform :ios do
     update_sample_app_carthage_dependency(version_number: new_version)
     end_release_branch(version_number: new_version)
 
-    Dir.chdir("SampleApp") do
-      carthage(command: "update")
+    Dir.chdir("../SampleApp") do
+      sh  "carthage update"
     end
 
     test_sample_app
