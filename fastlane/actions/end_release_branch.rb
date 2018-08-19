@@ -12,7 +12,7 @@ module Fastlane
 
         sh "git checkout master"
         sh "git merge --no-ff #{branch}"
-        sh "git tag -a \"Release #{branch}\""
+        sh "git tag -a \"#{params[:version_number]}\""
 
         sh "git branch -d #{branch}"
         sh "git push --all"
