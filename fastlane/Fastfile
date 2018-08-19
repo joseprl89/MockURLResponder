@@ -7,7 +7,8 @@ platform :ios do
 
   desc "Performs a release"
   lane :release do
-    run_tests
+    ensure_git_status_clean
+    tests
 
     new_version = get_version_to_release
     start_release_branch(version_number: new_version)
