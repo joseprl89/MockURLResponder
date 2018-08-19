@@ -16,11 +16,21 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## iOS
-### ios tests
+### ios all_tests
 ```
-fastlane ios tests
+fastlane ios all_tests
 ```
-Runs the tests for the SDK and the sample app.
+Runs the tests for the SDK and sample app.
+### ios test_sdk
+```
+fastlane ios test_sdk
+```
+Runs the tests for the SDK.
+### ios test_sample_app
+```
+fastlane ios test_sample_app
+```
+Runs the tests for the Sample App.
 ### ios release
 ```
 fastlane ios release

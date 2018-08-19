@@ -8,7 +8,7 @@ platform :ios do
   desc "Performs a release"
   lane :release do
     ensure_git_status_clean
-    test_sdk
+    all_tests
 
     new_version = get_version_to_release(target: "MockURLResponder")
 
