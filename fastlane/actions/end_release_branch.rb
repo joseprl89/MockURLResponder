@@ -6,6 +6,7 @@ module Fastlane
         UI.message "Switching to branch: release/#{params[:version_number]}"
         branch = "release/#{params[:version_number]}"
 
+        sh "git add -a && git commit -m \"Release #{params[:version_number]}.\""
         sh "git checkout develop"
         sh "git merge --no-ff #{branch}"
 
