@@ -17,7 +17,7 @@ public class MockURLResponder {
 	}
 
 	public struct Configuration {
-		static internal var responseHosts: [MockURLHostResponse]!
+		static internal var responseHosts: [MockURLHostResponse] = []
 		static public var mockingBehaviour: MockingBehaviour = .preventNonMockedNetworkCalls
 	}
 
@@ -34,7 +34,7 @@ public class MockURLResponder {
 
     public static func tearDown() {
         URLProtocol.unregisterClass(MockURLProtocol.self)
-        Configuration.responseHosts = nil
+        Configuration.responseHosts = []
     }
 
 }

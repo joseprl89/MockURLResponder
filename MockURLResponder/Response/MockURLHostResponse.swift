@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  MockURLHostResponse.swift
 //  MockURLResponderKit
 //
 //  Created by Josep Rodríguez López on 19/11/2017.
@@ -34,7 +34,10 @@ internal class MockURLHostResponse {
 		}
 
 		let argumentString = argument.replacingOccurrences(of: "--mock-url-response=", with: "")
-		let argumentData = argumentString.data(using: .utf8)!
+
+        guard let argumentData = argumentString.data(using: .utf8) else {
+            fatalError("Data couldn't be converted to a utf8 string.")
+        }
 		guard let jsonArgument = try? JSONSerialization.jsonObject(with: argumentData),
 			let jsonDictionary = jsonArgument as? [String: Any] else {
 			fatalError("Couldn't convert argument data to json object. Data received: \(argumentString)")

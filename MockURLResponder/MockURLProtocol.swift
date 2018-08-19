@@ -55,11 +55,22 @@ public class MockURLProtocol: URLProtocol {
 				return
 			}
 
-			let bodyData = mockResponse.body.data(using: .utf8)!
-			let response = HTTPURLResponse(url: request.url!, statusCode: mockResponse.status,
-										   httpVersion: nil, headerFields: mockResponse.headerFields)
+            guard let bodyData = mockResponse.body.data(using: .utf8) else {
+                fatalError("Could not convert response body of \(request) to Data using utf8.")
+            }
+
+            guard let url = request.url else {
+                fatalError("Could not load url for request \(request).")
+            }
+
+			guard let response = HTTPURLResponse(url: url,
+                                                 statusCode: mockResponse.status,
+                                                 httpVersion: nil,
+                                                 headerFields: mockResponse.headerFields) else {
+                fatalError("Could not create a url response for request \(request) to \(url).")
+            }
 			client?.urlProtocol(self, didLoad: bodyData)
-			client?.urlProtocol(self, didReceive: response!, cacheStoragePolicy: .notAllowed)
+			client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
 		}
 
 		if mockResponse.delay > 0 {

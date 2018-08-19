@@ -19,7 +19,10 @@ public class MockURLResponderConfigurator {
 			fatalError("Couldn't serialise arguments: \(jsonArguments)")
 		}
 
-        let stringJSONArgument = String(data: dataJSONArgument, encoding: .utf8)!
+        guard let stringJSONArgument = String(data: dataJSONArgument, encoding: .utf8) else {
+            fatalError("Couldn\t convert Data to String using utf8.")
+        }
+
         return [
             "--mock-url-response=\(stringJSONArgument)"
         ]

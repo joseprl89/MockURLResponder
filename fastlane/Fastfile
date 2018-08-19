@@ -1,59 +1,31 @@
-# This file contains the fastlane.tools configuration
-# You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
-
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
-
 default_platform(:ios)
 
+import "lanes/release.rb"
+import "lanes/tests.rb"
+
 platform :ios do
-  desc "Bumps the version"
-  lane :update_version do
-    version_number = bump_version_depending_on_input
-    update_sample_app_carthage_dependency(version_number: version_number)
-  end
 
-  private_lane :update_sample_app_carthage_dependency do |opts|
-    Dir.chdir("..") do
-      File.open('SampleApp/Cartfile', 'w') { |file|
-        file.write("github \"joseprl89/MockURLResponder\" \"#{opts[:version_number]}\"")
-      }
-    end
-  end
+  desc "Performs a release"
+  lane :release do |opts|
+    ensure_git_status_clean
+    all_tests
 
-  private_lane :bump_version_depending_on_input do
-    bump_type = UI.input("Please specify the type of bump you want:\n1. patch\n2. minor\n3. major\nSelected: ")
-    bump_name = case bump_type
-    when "1"
-      "patch"
-    when "2"
-      "minor"
-    when "3"
-      "major"
+    unless opts[:version].nil?
+      new_version = opts[:version]
     else
-      UI.error("Invalid option specified: #{bump_type}")
-      throw "Invalid option specified: #{bump_type}"
+      new_version = get_version_to_release(target: "MockURLResponder")
     end
 
+    start_release_branch(version_number: new_version)
+    bump_version(version_number: new_version)
+    update_sample_app_carthage_dependency(version_number: new_version)
+    end_release_branch(version_number: new_version)
 
-    version_number = increment_version_number(
-      bump_type: bump_name,
-      xcodeproj: "MockURLResponder.xcodeproj"
-    )
-    increment_version_number(
-      version_number: version_number,
-      xcodeproj: "SampleApp/MockURLResponderSampleApp.xcodeproj"
-    )
-    #return
-    version_number
+    Dir.chdir("SampleApp") do
+      carthage(command: "update")
+    end
+
+    test_sample_app
   end
+
 end
