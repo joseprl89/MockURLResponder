@@ -56,12 +56,13 @@ public class MockURLResponseBuilder {
 
     public func with(resource: String, ofType type: String, directory: String? = nil,
                      localization: String? = nil, bundle: Bundle = .main) -> MockURLResponseBuilder {
-        let url = bundle.url(
+        guard let url = bundle.url(
             forResource: resource,
             withExtension: type,
             subdirectory: directory,
-            localization: localization
-        )!
+            localization: localization) else {
+                fatalError("Could not create a url based on file \(resource).\(type) inside bundle \(bundle).")
+        }
 
         return with(bodyFromURL: url)
     }

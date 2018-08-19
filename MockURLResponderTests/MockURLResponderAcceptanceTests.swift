@@ -27,27 +27,27 @@ internal class MockURLResponderAcceptanceTests: XCTestCase {
 
         MockURLResponder.setUp(with: configurator.arguments)
 
-        XCTAssertEqual(get("https://www.w3.org/path?q=query#fragment"), body)
+        XCTAssertEqual(get("https://www.w3.org/path?q=query#fragment").successValue?.body, body)
     }
 
     func testPOSTWithoutConflictOnGet() {
         let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
 
         configurator.respond(to: "/path")
-            .when(method: "GET")
+            .when(method: .GET)
             .with(body: body)
             .once()
 
         configurator.respond(to: "/path")
-            .when(method: "POST")
+            .when(method: .POST)
             .with(body: "Received from POST")
             .once()
 
         MockURLResponder.setUp(with: configurator.arguments)
 
-        let bodyReceived =  post("https://www.w3.org/path?q=query#fragment")
-        XCTAssertEqual(bodyReceived, "Received from POST")
-        XCTAssertNotEqual(bodyReceived, body)
+        let result = post("https://www.w3.org/path?q=query#fragment")
+        XCTAssertEqual(result.successValue?.body, "Received from POST")
+        XCTAssertNotEqual(result.successValue?.body, body)
     }
 
     func testMocksStatusCode() {
@@ -59,7 +59,7 @@ internal class MockURLResponderAcceptanceTests: XCTestCase {
             .once()
 
         MockURLResponder.setUp(with: configurator.arguments)
-        XCTAssertEqual(getStatus("https://www.w3.org/path?q=query#fragment"), 400)
+        XCTAssertEqual(get("https://www.w3.org/path?q=query#fragment").successValue?.status, 400)
     }
 
     func testDefaultsTo200() {
@@ -70,7 +70,7 @@ internal class MockURLResponderAcceptanceTests: XCTestCase {
             .once()
 
         MockURLResponder.setUp(with: configurator.arguments)
-        XCTAssertEqual(getStatus("https://www.w3.org/path?q=query#fragment"), 200)
+        XCTAssertEqual(get("https://www.w3.org/path?q=query#fragment").successValue?.status, 200)
     }
 
     func testMocksMultipleHostsAtOnce() {
@@ -87,8 +87,8 @@ internal class MockURLResponderAcceptanceTests: XCTestCase {
             .once()
 
         MockURLResponder.setUp(with: w3OrgConfigurator.arguments + googleConfigurator.arguments)
-        XCTAssertEqual(get("https://www.google.com/path"), "google")
-        XCTAssertEqual(get("https://www.w3.org/path"), "w3")
+        XCTAssertEqual(get("https://www.google.com/path").successValue?.body, "google")
+        XCTAssertEqual(get("https://www.w3.org/path").successValue?.body, "w3")
     }
 
     func testMocksMultiplePathsAtOnce() {
@@ -103,8 +103,8 @@ internal class MockURLResponderAcceptanceTests: XCTestCase {
             .once()
 
         MockURLResponder.setUp(with: configurator.arguments)
-        XCTAssertEqual(get("https://www.w3.org/path/one"), "one")
-        XCTAssertEqual(get("https://www.w3.org/path/two"), "two")
+        XCTAssertEqual(get("https://www.w3.org/path/one").successValue?.body, "one")
+        XCTAssertEqual(get("https://www.w3.org/path/two").successValue?.body, "two")
     }
 
     func testMocksMultipleResponsesSerially() {
@@ -119,8 +119,8 @@ internal class MockURLResponderAcceptanceTests: XCTestCase {
             .once()
 
         MockURLResponder.setUp(with: configurator.arguments)
-        XCTAssertEqual(get("https://www.w3.org/path"), "one")
-        XCTAssertEqual(get("https://www.w3.org/path"), "two")
+        XCTAssertEqual(get("https://www.w3.org/path").successValue?.body, "one")
+        XCTAssertEqual(get("https://www.w3.org/path").successValue?.body, "two")
     }
 
     func testRepeatsResponses() {
@@ -136,9 +136,9 @@ internal class MockURLResponderAcceptanceTests: XCTestCase {
 
         MockURLResponder.setUp(with: configurator.arguments)
 
-        XCTAssertEqual(get("https://www.w3.org/path"), "one")
-        XCTAssertEqual(get("https://www.w3.org/path"), "one")
-        XCTAssertEqual(get("https://www.w3.org/path"), "three")
+        XCTAssertEqual(get("https://www.w3.org/path").successValue?.body, "one")
+        XCTAssertEqual(get("https://www.w3.org/path").successValue?.body, "one")
+        XCTAssertEqual(get("https://www.w3.org/path").successValue?.body, "three")
     }
 
     func testRepeatsResponsesForever() {
@@ -151,7 +151,7 @@ internal class MockURLResponderAcceptanceTests: XCTestCase {
         MockURLResponder.setUp(with: configurator.arguments)
 
         for _ in 0..<100 {
-            XCTAssertEqual(get("https://www.w3.org/path"), "one")
+            XCTAssertEqual(get("https://www.w3.org/path").successValue?.body, "one")
         }
     }
 
@@ -164,7 +164,7 @@ internal class MockURLResponderAcceptanceTests: XCTestCase {
 
         MockURLResponder.setUp(with: configurator.arguments)
 
-        XCTAssertNotNil(getError("https://www.w3.org/path"))
+        XCTAssertNotNil(get("https://www.w3.org/path").failureValue)
     }
 
     func testAddsDelay() {
@@ -178,7 +178,7 @@ internal class MockURLResponderAcceptanceTests: XCTestCase {
         MockURLResponder.setUp(with: configurator.arguments)
 
         let startTime = Date()
-        XCTAssertNotNil(get("https://www.w3.org/path"))
+        XCTAssertNotNil(get("https://www.w3.org/path").successValue)
         let endTime = Date()
 
         XCTAssertGreaterThan(endTime.timeIntervalSince(startTime), delay)
@@ -193,7 +193,7 @@ internal class MockURLResponderAcceptanceTests: XCTestCase {
 
         MockURLResponder.setUp(with: configurator.arguments + ["-FIRDebugEnabled"])
 
-        XCTAssertEqual(get("https://www.w3.org/path"), "response")
+        XCTAssertEqual(get("https://www.w3.org/path").successValue?.body, "response")
     }
 
     func testSupportsFileAsBodyResponse() {
@@ -205,7 +205,7 @@ internal class MockURLResponderAcceptanceTests: XCTestCase {
 
         MockURLResponder.setUp(with: configurator.arguments)
 
-        XCTAssertEqual(get("https://www.w3.org/path"), "{ \"test\": \"passed\" }\n")
+        XCTAssertEqual(get("https://www.w3.org/path").successValue?.body, "{ \"test\": \"passed\" }\n")
     }
 
     func testSupportsFilteringResponseByQuery() {
@@ -222,7 +222,7 @@ internal class MockURLResponderAcceptanceTests: XCTestCase {
 
         MockURLResponder.setUp(with: configurator.arguments)
 
-        XCTAssertEqual(get("https://www.w3.org/path?q=query"), "With query")
+        XCTAssertEqual(get("https://www.w3.org/path?q=query").successValue?.body, "With query")
     }
 
     func testSupportsFilteringResponseByQueryWhenNotExactQuery() {
@@ -239,7 +239,7 @@ internal class MockURLResponderAcceptanceTests: XCTestCase {
 
         MockURLResponder.setUp(with: configurator.arguments)
 
-        XCTAssertEqual(get("https://www.w3.org/path?q=queryable"), "Without query")
+        XCTAssertEqual(get("https://www.w3.org/path?q=queryable").successValue?.body, "Without query")
     }
 
     func testSupportsFilteringResponseByHeader() {
@@ -256,7 +256,12 @@ internal class MockURLResponderAcceptanceTests: XCTestCase {
 
         MockURLResponder.setUp(with: configurator.arguments)
 
-        XCTAssertEqual(get("https://www.w3.org/path", headerFields: ["X-Authorization-Id": "token"]), "With token")
+        XCTAssertEqual(
+            get("https://www.w3.org/path", headerFields: [
+                "X-Authorization-Id": "token"
+            ]).successValue?.body,
+            "With token"
+        )
     }
 
     func testSupportsFilteringResponseByHeaderWhenHeaderNotEqual() {
@@ -273,8 +278,28 @@ internal class MockURLResponderAcceptanceTests: XCTestCase {
 
         MockURLResponder.setUp(with: configurator.arguments)
 
-        let body = get("https://www.w3.org/path", headerFields: ["X-Authorization-Id": "something else"])
+        let body = get(
+            "https://www.w3.org/path",
+            headerFields: [
+                "X-Authorization-Id": "something else"
+            ]
+        ).successValue?.body
         XCTAssertEqual(body, "Without token")
+    }
+
+    func testSupportsHeaderValuesInResponse() {
+        let configurator = MockURLResponderConfigurator(scheme: "https", host: "www.w3.org")
+
+        configurator.respond(to: "/path")
+            .with(value: "Value", forHeaderField: "Key")
+            .once()
+
+        MockURLResponder.setUp(with: configurator.arguments)
+
+        XCTAssertEqual(
+            get("https://www.w3.org/path").successValue?.httpHeaders["Key"] as? String,
+            "Value"
+        )
     }
 
     func testSupportsEncodingSpecialCharacters() {
@@ -286,6 +311,6 @@ internal class MockURLResponderAcceptanceTests: XCTestCase {
 
         MockURLResponder.setUp(with: configurator.arguments)
 
-        XCTAssertEqual(get("https://www.w3.org/path"), "{ \"test\": \"passed ąęłóńźż\" }")
+        XCTAssertEqual(get("https://www.w3.org/path").successValue?.body, "{ \"test\": \"passed ąęłóńźż\" }")
     }
 }

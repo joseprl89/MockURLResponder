@@ -10,7 +10,10 @@ import MockURLRecorder
 import MockURLResponderTestAPI
 
 internal func mockFor(_ url: URL, method: String, withResponse response: String) -> [String] {
-    let configurator = MockURLResponderConfigurator(scheme: url.scheme!, host: url.host!)
+    guard let scheme = url.scheme, let host = url.host else {
+        fatalError("URL \(url) did not contain a host or a scheme.")
+    }
+    let configurator = MockURLResponderConfigurator(scheme: scheme, host: host)
 
     configurator.respond(to: url.path)
         .when(method: method)
