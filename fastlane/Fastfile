@@ -8,13 +8,20 @@ platform :ios do
   desc "Performs a release"
   lane :release do
     ensure_git_status_clean
-    tests
+    test_sdk
 
-    new_version = get_version_to_release
+    new_version = get_version_to_release(target: "MockURLResponder")
+
     start_release_branch(version_number: new_version)
     bump_version(version_number: new_version)
     update_sample_app_carthage_dependency(version_number: version_number)
     end_release_branch(version_number: new_version)
+
+    Dir.chdir("SampleApp") do
+      carthage(command: "update")
+    end
+
+    test_sample_app
   end
 
 end
