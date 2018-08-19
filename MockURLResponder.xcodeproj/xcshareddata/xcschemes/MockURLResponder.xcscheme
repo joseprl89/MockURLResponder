@@ -38,6 +38,16 @@
                ReferencedContainer = "container:MockURLResponder.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "75A1864B2129CEF800B2C18B"
+               BuildableName = "MockURLRecorderTests.xctest"
+               BlueprintName = "MockURLRecorderTests"
+               ReferencedContainer = "container:MockURLResponder.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

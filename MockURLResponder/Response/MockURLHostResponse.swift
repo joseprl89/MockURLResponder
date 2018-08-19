@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  MockURLHostResponse.swift
 //  MockURLResponderKit
 //
 //  Created by Josep Rodríguez López on 19/11/2017.
