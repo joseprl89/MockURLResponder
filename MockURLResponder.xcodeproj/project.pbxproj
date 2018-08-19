@@ -24,6 +24,8 @@
 		728CEAD91FC77835003230CF /* ConfiguratorDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CEAD81FC77835003230CF /* ConfiguratorDSL.swift */; };
 		72E0F0FB1FC980D0007B9C0C /* RecordedInteractionsOnHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E0F0FA1FC980D0007B9C0C /* RecordedInteractionsOnHost.swift */; };
 		72E0F0FD1FC984B9007B9C0C /* RecordedInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E0F0FC1FC984B9007B9C0C /* RecordedInteraction.swift */; };
+		756414632129D63E00362850 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756414622129D63E00362850 /* Result.swift */; };
+		756414642129D63E00362850 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756414622129D63E00362850 /* Result.swift */; };
 		75A186512129CEF800B2C18B /* MockURLRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728CEAC71FC76EBB003230CF /* MockURLRecorder.framework */; };
 		75A186572129CF1600B2C18B /* getCall.txt in Resources */ = {isa = PBXBuildFile; fileRef = 728CEADD1FC77BC5003230CF /* getCall.txt */; };
 		75A186582129CF1600B2C18B /* getTwoCallsSameResponses.txt in Resources */ = {isa = PBXBuildFile; fileRef = 72E0F0F81FC97E7A007B9C0C /* getTwoCallsSameResponses.txt */; };
@@ -93,6 +95,7 @@
 		72E0F0FA1FC980D0007B9C0C /* RecordedInteractionsOnHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordedInteractionsOnHost.swift; sourceTree = "<group>"; };
 		72E0F0FC1FC984B9007B9C0C /* RecordedInteraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordedInteraction.swift; sourceTree = "<group>"; };
 		72E0F0FE1FC98BB3007B9C0C /* getThreeCallsRespondingABADoesNotMerge.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = getThreeCallsRespondingABADoesNotMerge.txt; sourceTree = "<group>"; };
+		756414622129D63E00362850 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		75A1864C2129CEF800B2C18B /* MockURLRecorderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MockURLRecorderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		75A186502129CEF800B2C18B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92285AE41FC07470001D5E1B /* MockURLResponder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MockURLResponder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,6 +230,7 @@
 			children = (
 				728CEAD81FC77835003230CF /* ConfiguratorDSL.swift */,
 				92285B161FC079D0001D5E1B /* NetworkInteractions.swift */,
+				756414622129D63E00362850 /* Result.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -561,6 +565,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75A1865F2129CFF400B2C18B /* NetworkInteractions.swift in Sources */,
+				756414642129D63E00362850 /* Result.swift in Sources */,
 				75A1865C2129CF9C00B2C18B /* FileSystem.swift in Sources */,
 				75A186612129D00B00B2C18B /* ConfiguratorDSL.swift in Sources */,
 				75A1865A2129CF2200B2C18B /* MockURLRecorderAcceptanceTests.swift in Sources */,
@@ -584,6 +589,7 @@
 			files = (
 				75A186602129CFF400B2C18B /* NetworkInteractions.swift in Sources */,
 				728CEAD91FC77835003230CF /* ConfiguratorDSL.swift in Sources */,
+				756414632129D63E00362850 /* Result.swift in Sources */,
 				92285B0E1FC0759D001D5E1B /* MockURLResponderAcceptanceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

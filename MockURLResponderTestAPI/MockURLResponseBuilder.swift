@@ -61,7 +61,7 @@ public class MockURLResponseBuilder {
             withExtension: type,
             subdirectory: directory,
             localization: localization) else {
-                fatalError("Could not create a url based on file \(resource).\(type) in \(directory), localization \(localization) inside bundle \(bundle).")
+                fatalError("Could not create a url based on file \(resource).\(type) inside bundle \(bundle).")
         }
 
         return with(bodyFromURL: url)
