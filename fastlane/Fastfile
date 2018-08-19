@@ -6,11 +6,11 @@ import "lanes/tests.rb"
 platform :ios do
 
   desc "Performs a release"
-  lane :release do
+  lane :release do |opts|
     ensure_git_status_clean
     all_tests
 
-    new_version = get_version_to_release(target: "MockURLResponder")
+    new_version = opts[:new_version] || get_version_to_release(target: "MockURLResponder")
 
     start_release_branch(version_number: new_version)
     bump_version(version_number: new_version)

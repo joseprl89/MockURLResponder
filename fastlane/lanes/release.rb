@@ -4,7 +4,8 @@ platform :ios do
       xcodeproj: "MockURLResponder.xcodeproj",
       target: "MockURLResponder"
     )
-    return UI.input("Please specify the new version (current = #{current_version}):")
+
+    UI.input("Please specify the new version (current = #{current_version}):")
   end
 
   private_lane :bump_version do |opts|
