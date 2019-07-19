@@ -13,6 +13,9 @@
          <FileRef
             location = "group:BuildingAResponse.md">
          </FileRef>
+         <FileRef
+            location = "group:Maintenance.md">
+         </FileRef>
       </Group>
    </Group>
    <Group
