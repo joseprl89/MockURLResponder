@@ -1,3 +1,3 @@
 # Releasing
 
-Execute `fastlane release`.
+Merge any needed feature branches into develop, then execute `fastlane release`.
