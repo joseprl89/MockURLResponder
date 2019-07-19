@@ -11,7 +11,7 @@ module Fastlane
         sh "git merge --no-ff #{branch}"
 
         sh "git checkout master"
-        sh "git merge --no-ff #{branch}"
+        sh "git merge --no-ff develop"
         sh "git tag -a \"#{params[:version_number]}\"  -m \"Release #{params[:version_number]}\""
 
         sh "git branch -d #{branch}"
