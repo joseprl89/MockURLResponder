@@ -1,0 +1,3 @@
+# Releasing
+
+Execute `fastlane release`.
