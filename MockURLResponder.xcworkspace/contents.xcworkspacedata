@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <Group
+      location = "container:"
+      name = "Documentation">
+      <FileRef
+         location = "group:README.md">
+      </FileRef>
+      <Group
+         location = "group:docs"
+         name = "docs">
+         <FileRef
+            location = "group:BuildingAResponse.md">
+         </FileRef>
+      </Group>
+   </Group>
+   <Group
+      location = "container:"
+      name = "PodSpecs">
+      <FileRef
+         location = "group:MockURLResponder.podspec">
+      </FileRef>
+      <FileRef
+         location = "group:MockURLResponderTestAPI.podspec">
+      </FileRef>
+   </Group>
    <FileRef
       location = "group:MockURLResponder.xcodeproj">
    </FileRef>
