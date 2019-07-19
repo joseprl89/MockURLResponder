@@ -95,13 +95,13 @@ private func matchingResponse(forRequest request: URLRequest) -> MockURLResponse
 	})
 }
 
-extension MockURLHostResponse {
+private extension MockURLHostResponse {
     func matches(_ request: URLRequest) -> Bool {
         return host == request.url?.host && scheme == request.url?.scheme
     }
 }
 
-extension MockURLResponse {
+private extension MockURLResponse {
     func matches(_ request: URLRequest) -> Bool {
         return method == request.httpMethod
             && path == request.url?.path

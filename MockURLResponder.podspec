@@ -11,4 +11,5 @@ Pod::Spec.new do |s|
   }
   s.source        = { :git => "https://github.com/joseprl89/MockURLResponder.git", :tag => "#{s.version}" }
   s.source_files  = "MockURLResponder/**/*.swift"
+  s.swift_version = '5.0'
 end
