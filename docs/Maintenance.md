@@ -4,12 +4,10 @@ This document details some of the regular maintenance tasks we are to perform on
 
 ## Update Swift
 
-Use Xcode's migration tool to migrate the codebase onto the latest Swift.
+Steps:
 
-Run all tests to ensure the operation is successful:
-
-```bash
-fastlane all_tests
-```
-
-Once done, use the fastlane release lane to create a new release using the new Swift version.
+* Use Xcode's migration tool to migrate the codebase onto the latest Swift.
+* Do the same on the SampleApp project
+* Run all tests: `fastlane all_tests`
+* Update CocoaPods specs to use the right Swift version
+* Perform a [release](Releasing.md).

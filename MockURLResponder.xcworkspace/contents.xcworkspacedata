@@ -11,6 +11,9 @@
          location = "group:docs"
          name = "docs">
          <FileRef
+            location = "group:Releasing.md">
+         </FileRef>
+         <FileRef
             location = "group:BuildingAResponse.md">
          </FileRef>
          <FileRef
